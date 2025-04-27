@@ -29,15 +29,13 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   };
 
   // Handler for navigating to profile
-  const handleProfileClick = (e) => {
-    e.preventDefault();
-    navigate('/profile', { replace: true });
+  const handleProfileClick = () => {
+    navigate('/profile');
   };
 
   // Handler for navigating to home
-  const handleHomeClick = (e) => {
-    e.preventDefault();
-    navigate('/home', { replace: true });
+  const handleHomeClick = () => {
+    navigate('/home');
   };
   
   return (
@@ -56,7 +54,6 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
             <NavLink 
               to="/home" 
               className="flex items-center ml-1 md:ml-0"
-              onClick={handleHomeClick}
             >
               <img 
                 src="https://ui-avatars.com/api/?name=S+M&background=random&color=fff"
@@ -108,9 +105,9 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
               <ShoppingCartIcon className="h-5 w-5 text-blue-500" />
             </button>
             
-            <div 
+            <NavLink 
+              to="/profile" 
               className="flex items-center ml-1 sm:ml-0 cursor-pointer"
-              onClick={handleProfileClick}
             >
               <div className="flex items-center">
                 <img
@@ -120,7 +117,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
                 />
                 <span className="ml-2 text-white text-sm font-medium hidden md:block">{user.name}</span>
               </div>
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>

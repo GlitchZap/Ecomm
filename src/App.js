@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import AuthPage from "./pages/AuthPage";
 import Home from "./pages/Home";
 import Marketplace from "./pages/Marketplace";
@@ -15,7 +15,8 @@ function App() {
     <UserProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<AuthPage />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route element={<Layout />}>
             <Route path="/home" element={<Home />} />
             <Route path="/marketplace" element={<Marketplace />} />

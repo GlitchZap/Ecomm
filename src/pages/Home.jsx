@@ -72,8 +72,7 @@ const Home = () => {
   ];
 
   // Navigation handler
-  const handleNavigation = (path, e) => {
-    if (e) e.preventDefault();
+  const handleNavigation = (path) => {
     navigate(path);
   };
   
@@ -142,7 +141,7 @@ const Home = () => {
                   Expand your reach by listing your products on Amazon, Flipkart, and more.
                 </p>
                 <button 
-                  onClick={(e) => handleNavigation('/marketplace', e)}
+                  onClick={(e) => handleNavigation('/marketplace')}
                   className="mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
                 >
                   Explore Marketplaces
@@ -216,13 +215,13 @@ const Home = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <button 
-                    onClick={(e) => handleNavigation('/pricing', e)}
+                    onClick={(e) => handleNavigation('/pricing')}
                     className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
                   >
                     View Pricing Plans
                   </button>
                   <button 
-                    onClick={(e) => handleNavigation('/profile', e)}
+                    onClick={(e) => handleNavigation('/profile')}
                     className="bg-transparent border border-white text-white px-3 py-1.5 rounded-lg font-medium hover:bg-white/10 text-center text-sm"
                   >
                     Learn More
@@ -330,7 +329,7 @@ const Home = () => {
             </div>
             <div className="flex-shrink-0">
               <button
-                onClick={(e) => handleNavigation('/pricing', e)}
+                onClick={(e) => handleNavigation('/pricing')}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm text-xs"
               >
                 View Plans

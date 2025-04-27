@@ -115,8 +115,10 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
               <NavLink
                 to={item.path}
                 onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation(item.path, item.onClick);
+                  if (item.onClick) {
+                    e.preventDefault();
+                    handleNavigation(item.path, item.onClick);
+                  }
                 }}
                 className={({ isActive }) => `
                   flex items-center px-4 py-2 text-sm font-medium
