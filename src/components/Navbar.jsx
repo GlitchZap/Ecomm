@@ -30,7 +30,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   
   return (
     <header className="bg-gradient-to-r from-orange-500 to-amber-500 shadow-md fixed top-0 left-0 right-0 z-50 h-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           {/* Left section */}
           <div className="flex items-center">
@@ -41,13 +41,13 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
             >
               <MenuIcon className="h-6 w-6" />
             </button>
-            <Link to="/home" className="flex items-center">
+            <Link to="/home" className="flex items-center ml-1 md:ml-0">
               <img 
                 src="https://ui-avatars.com/api/?name=V+H&background=random&color=fff"
-                className="h-8 w-8 rounded-md mr-2" 
+                className="h-8 w-8 rounded-md mr-1 sm:mr-2" 
                 alt="VendorHub"
               />
-              <span className="text-white font-bold text-xl">VendorHub</span>
+              <span className="text-white font-bold text-lg sm:text-xl">VendorHub</span>
             </Link>
           </div>
           
@@ -66,33 +66,33 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           </div>
           
           {/* Right section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-1 sm:space-x-4">
             <button 
-              className="p-2 rounded-full text-white hover:bg-white/10 relative"
+              className="p-1 sm:p-2 rounded-full text-white hover:bg-white/10 relative flex items-center justify-center"
               onClick={handleToggleNotifications}
               aria-label="Notifications"
             >
               <BellIcon className="h-5 w-5" />
-              <span className="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs flex items-center justify-center">3</span>
+              <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs flex items-center justify-center">3</span>
             </button>
             
             <button 
-              className="p-2 rounded-full text-white hover:bg-white/10 relative"
+              className="p-1 sm:p-2 rounded-full text-white hover:bg-white/10 relative flex items-center justify-center"
               onClick={handleToggleInbox}
               aria-label="Messages"
             >
               <InboxIcon className="h-5 w-5" />
-              <span className="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs flex items-center justify-center">5</span>
+              <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs flex items-center justify-center">5</span>
             </button>
             
             <button 
-              className="p-2 rounded-full text-white hover:bg-white/10"
+              className="p-1 sm:p-2 rounded-full text-white hover:bg-white/10 flex items-center justify-center"
               onClick={() => alert("Shopping cart will be implemented in future updates!")}
             >
               <ShoppingCartIcon className="h-5 w-5" />
             </button>
             
-            <Link to="/profile">
+            <Link to="/profile" className="flex items-center ml-1 sm:ml-0">
               <div className="flex items-center">
                 <img
                   className="h-8 w-8 rounded-full border-2 border-white"

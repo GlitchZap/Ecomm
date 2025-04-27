@@ -1,353 +1,238 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
+import { useUser } from "../context/UserContext";
 import { 
-  LightBulbIcon,
-  TrendingUpIcon,
-  SearchIcon,
-  ChartBarIcon,
-  CurrencyRupeeIcon,
+  PaperAirplaneIcon,
+  MicrophoneIcon,
   PhotographIcon,
-  ShoppingCartIcon
+  DocumentTextIcon,
+  LightBulbIcon,
+  ChatIcon,
+  ChartBarIcon,
+  CogIcon
 } from "@heroicons/react/outline";
 
 const AiSupport = () => {
-  const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState([
+  const { user } = useUser();
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([
     { 
-      role: "ai", 
-      content: "Hello! I'm your AI pricing assistant. I can help you optimize your product prices based on market trends and competitor analysis. What would you like to know today?",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      type: 'assistant', 
+      content: 'Hello! I\'m your AI assistant. How can I help you with your business today?',
+      timestamp: '11:30 AM'
     }
   ]);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const messagesEndRef = useRef(null);
   
-  const handleSendMessage = (e) => {
-    e.preventDefault();
+  // Auto-scroll to bottom of messages
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleSend = () => {
+    if (input.trim() === '') return;
     
-    if (!message.trim()) return;
-    
-    // Add user message to chat
-    const userMessage = {
-      role: "user",
-      content: message,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-    
-    setChatHistory(prev => [...prev, userMessage]);
-    setMessage("");
+    // Add user message
+    const newMessages = [...messages, { type: 'user', content: input, timestamp: getCurrentTime() }];
+    setMessages(newMessages);
+    setInput('');
     
     // Simulate AI response
     setTimeout(() => {
-      const aiResponses = [
-        "Based on current market trends, I recommend pricing your handcrafted wooden items between ₹899 and ₹1,299. This price range is competitive while still valuing your craftsmanship.",
-        "I've analyzed similar products on major marketplaces. Your competitors are pricing their items at an average of ₹1,150 with a range from ₹899 to ₹1,599.",
-        "The optimal price point for your embroidered cushion covers appears to be ₹749. This balances profit margins with market competitiveness.",
-        "For festival season sales, consider a 15-20% discount strategy. Data shows this discount range maximizes both sales volume and profit margins.",
-        "Your current prices are approximately 12% higher than similar products on Amazon and Flipkart. Consider adjusting to improve competitiveness."
-      ];
-      
-      const aiMessage = {
-        role: "ai",
-        content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      
-      setChatHistory(prev => [...prev, aiMessage]);
+      setMessages([
+        ...newMessages,
+        { 
+          type: 'assistant', 
+          content: getAIResponse(input),
+          timestamp: getCurrentTime()
+        }
+      ]);
     }, 1000);
   };
-  
-  const trendingCategories = [
-    { name: "Home Decor", growth: "+24%", recommendation: "Increase prices by 8-10%" },
-    { name: "Kitchen Accessories", growth: "+18%", recommendation: "Maintain current pricing" },
-    { name: "Handcrafted Jewelry", growth: "+15%", recommendation: "Bundle offers recommended" },
-    { name: "Traditional Textiles", growth: "+12%", recommendation: "Focus on premium segment" },
-    { name: "Eco-friendly Products", growth: "+32%", recommendation: "Increase inventory, maintain pricing" },
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+  };
+
+  const getAIResponse = (question) => {
+    const responses = [
+      "Based on your store's data, I recommend focusing on home decor items as they're showing 42% higher conversion rates than other categories.",
+      "I've analyzed your pricing strategy and noticed your competitors are pricing similar items 15-20% higher. You might have room to increase prices while remaining competitive.",
+      "Your inventory shows 5 products below the restock threshold. Would you like me to prepare a purchase order for these items?",
+      "I've detected that your store's load time has increased by 30% in the last week. This might be affecting your conversion rate. Let me help you optimize your images.",
+      "Looking at your recent reviews, customers frequently mention product quality and fast shipping as positives, but several have noted issues with packaging. Would you like some suggestions to improve this?"
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
+
+  const categories = [
+    { id: 'all', name: 'All Topics', icon: <ChatIcon className="h-5 w-5" /> },
+    { id: 'sales', name: 'Sales', icon: <ChartBarIcon className="h-5 w-5" /> },
+    { id: 'market', name: 'Market Insights', icon: <LightBulbIcon className="h-5 w-5" /> },
+    { id: 'settings', name: 'Settings', icon: <CogIcon className="h-5 w-5" /> }
   ];
-  
-  const featureCards = [
-    {
-      title: "Price Optimization",
-      description: "Get AI-powered recommendations for optimal pricing of your products",
-      icon: <CurrencyRupeeIcon className="h-6 w-6 text-orange-500" />,
-      color: "bg-orange-50",
-    },
-    {
-      title: "Trend Analysis",
-      description: "Identify trending products and categories to focus your inventory",
-      icon: <TrendingUpIcon className="h-6 w-6 text-blue-500" />,
-      color: "bg-blue-50",
-    },
-    {
-      title: "Competitor Tracking",
-      description: "Monitor competitor pricing across major marketplaces",
-      icon: <SearchIcon className="h-6 w-6 text-green-500" />,
-      color: "bg-green-50",
-    },
-    {
-      title: "Seasonal Forecasting",
-      description: "Prepare for seasonal demand with predictive insights",
-      icon: <ChartBarIcon className="h-6 w-6 text-purple-500" />,
-      color: "bg-purple-50",
-    },
-    {
-      title: "Image Optimization",
-      description: "Get tips to improve your product images for better conversion",
-      icon: <PhotographIcon className="h-6 w-6 text-pink-500" />,
-      color: "bg-pink-50",
-    },
-    {
-      title: "Inventory Suggestions",
-      description: "Receive smart recommendations for inventory management",
-      icon: <ShoppingCartIcon className="h-6 w-6 text-teal-500" />,
-      color: "bg-teal-50",
-    },
+
+  const quickQuestions = [
+    "How can I improve my product descriptions?",
+    "What are the trending products in my category?",
+    "How do I optimize my store for mobile users?",
+    "What pricing strategy would work best for my products?",
+    "Can you analyze my recent sales performance?"
   ];
 
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">AI Support</h1>
-        <p className="text-gray-600">Get intelligent insights and price recommendations</p>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">AI Support Assistant</h1>
+        <p className="text-gray-600 text-sm">Get AI-powered insights and answers for your business</p>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* AI Chat Section */}
-        <div className="lg:col-span-2">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-xl shadow-sm overflow-hidden h-full flex flex-col"
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Left Sidebar - Categories & Quick Questions */}
+        <div className="lg:col-span-1 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-white rounded-xl shadow-sm p-4 border border-gray-100"
           >
-            <div className="p-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white">
-              <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                  <LightBulbIcon className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="font-bold">Price Intelligence Assistant</h2>
-                  <p className="text-white/80 text-sm">Online and ready to help</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ minHeight: "400px" }}>
-              {chatHistory.map((msg, index) => (
-                <div 
-                  key={index} 
-                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            <h2 className="text-base font-medium text-gray-800 mb-3">Categories</h2>
+            <div className="space-y-1">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`w-full flex items-center px-3 py-2 rounded-lg text-sm ${
+                    activeCategory === category.id
+                      ? 'bg-orange-50 text-orange-600'
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
                 >
-                  <div 
-                    className={`max-w-[80%] rounded-2xl p-4 ${
-                      msg.role === 'user' 
-                        ? 'bg-orange-500 text-white rounded-tr-none' 
-                        : 'bg-gray-100 text-gray-800 rounded-tl-none'
-                    }`}
-                  >
-                    <p className="text-sm">{msg.content}</p>
-                    <p className={`text-xs mt-1 ${msg.role === 'user' ? 'text-white/70' : 'text-gray-500'}`}>
-                      {msg.timestamp}
-                    </p>
-                  </div>
-                </div>
+                  <span className="mr-2">{category.icon}</span>
+                  {category.name}
+                </button>
               ))}
             </div>
-            
-            <div className="p-4 border-t border-gray-200">
-              <form onSubmit={handleSendMessage} className="flex items-center">
-                <input
-                  type="text"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Ask about pricing recommendations..."
-                  className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white rounded-xl shadow-sm p-4 border border-gray-100"
+          >
+            <h2 className="text-base font-medium text-gray-800 mb-3">Quick Questions</h2>
+            <div className="space-y-2">
+              {quickQuestions.map((question, index) => (
                 <button
-                  type="submit"
-                  className="bg-orange-500 text-white px-4 py-2 rounded-r-lg hover:bg-orange-600"
+                  key={index}
+                  onClick={() => {
+                    setInput(question);
+                  }}
+                  className="w-full text-left p-2 rounded-lg text-xs sm:text-sm text-gray-600 hover:bg-gray-50"
                 >
-                  Send
+                  {question}
                 </button>
-              </form>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {["What's the optimal price for wooden crafts?", "Check competitor prices", "Pricing for festival season"].map((suggestion, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setMessage(suggestion)}
-                    className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded-full"
-                  >
-                    {suggestion}
-                  </button>
-                ))}
-              </div>
+              ))}
             </div>
           </motion.div>
         </div>
         
-        {/* Trending Categories & Tools */}
-        <div className="space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="bg-white rounded-xl shadow-sm overflow-hidden"
-          >
-            <div className="p-4 bg-blue-500 text-white">
-              <h2 className="font-bold flex items-center">
-                <TrendingUpIcon className="h-5 w-5 mr-2" />
-                Trending Categories
-              </h2>
-            </div>
-            <div className="p-4">
-              <div className="space-y-4">
-                {trendingCategories.map((category, index) => (
-                  <div key={index} className="flex justify-between pb-2 border-b border-gray-100 last:border-0">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-800">{category.name}</h3>
-                      <p className="text-xs text-gray-500 mt-1">Recommended: {category.recommendation}</p>
-                    </div>
-                    <span className="text-sm text-green-500 font-medium">{category.growth}</span>
-                  </div>
-                ))}
+        {/* Chat Area */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col h-[600px]"
+        >
+          {/* Chat Header */}
+          <div className="border-b border-gray-100 px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center">
+                <LightBulbIcon className="h-5 w-5 text-orange-500" />
+              </div>
+              <div className="ml-2">
+                <p className="text-sm font-medium text-gray-800">VendorHub AI Assistant</p>
+                <p className="text-xs text-green-500">Online</p>
               </div>
             </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white rounded-xl shadow-sm overflow-hidden"
-          >
-            <div className="p-4 border-b border-gray-100">
-              <h2 className="font-bold text-gray-800">Market Insights</h2>
-            </div>
-            <div className="p-4">
-              <div className="space-y-2 text-sm">
-                <p className="flex items-center text-gray-700">
-                  <span className="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
-                  Handicraft market is growing at 18% annually
-                </p>
-                <p className="flex items-center text-gray-700">
-                  <span className="h-2 w-2 bg-blue-500 rounded-full mr-2"></span>
-                  Average order value increased by ₹240 this month
-                </p>
-                <p className="flex items-center text-gray-700">
-                  <span className="h-2 w-2 bg-orange-500 rounded-full mr-2"></span>
-                  Festival season expected to drive 32% higher sales
-                </p>
-                <p className="flex items-center text-gray-700">
-                  <span className="h-2 w-2 bg-purple-500 rounded-full mr-2"></span>
-                  Eco-friendly packaging can increase conversions by 12%
-                </p>
-              </div>
-              <button className="mt-4 text-sm text-blue-500 hover:text-blue-600 font-medium">
-                View Detailed Report
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-      
-      {/* AI Feature Cards */}
-      <div className="mt-8">
-        <h2 className="text-xl font-bold text-gray-800 mb-4">AI-Powered Tools</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featureCards.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
-            >
-              <div className="p-6">
-                <div className={`h-12 w-12 rounded-full ${feature.color} flex items-center justify-center mb-4`}>
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.description}</p>
-                <button className="mt-4 text-sm text-orange-500 hover:text-orange-600 font-medium">
-                  Try Now
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Market Analysis Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mt-8 bg-white rounded-xl shadow-sm overflow-hidden"
-      >
-        <div className="p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Price Comparison Analysis</h2>
-          <p className="text-gray-600 mb-6">
-            Compare your product prices with competitors across marketplaces
-          </p>
-          
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Product Category
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Your Avg. Price
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Market Avg.
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Difference
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Recommendation
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {[
-                  { category: "Handcrafted Ceramic Items", yourPrice: "₹1,299", marketAvg: "₹1,199", diff: "+8.3%", recommendation: "Consider slight price reduction" },
-                  { category: "Wooden Home Decor", yourPrice: "₹899", marketAvg: "₹849", diff: "+5.9%", recommendation: "Price is competitive" },
-                  { category: "Embroidered Textiles", yourPrice: "₹749", marketAvg: "₹799", diff: "-6.3%", recommendation: "Increase prices slightly" },
-                  { category: "Jute Products", yourPrice: "₹649", marketAvg: "₹599", diff: "+8.3%", recommendation: "Focus on quality messaging" },
-                  { category: "Brass Decoratives", yourPrice: "₹1,499", marketAvg: "₹1,699", diff: "-11.8%", recommendation: "Opportunity to increase prices" },
-                ].map((item, index) => (
-                  <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{item.category}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.yourPrice}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.marketAvg}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`text-sm font-medium ${
-                        item.diff.startsWith('+') ? 'text-red-600' : 'text-green-600'
-                      }`}>
-                        {item.diff}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-600">{item.recommendation}</div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          
-          <div className="mt-6 text-center">
-            <button className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 font-medium">
-              Generate Full Analysis Report
+            <button className="text-gray-400 hover:text-gray-600">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+              </svg>
             </button>
           </div>
-        </div>
-      </motion.div>
+          
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {messages.map((message, index) => (
+              <div 
+                key={index} 
+                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div 
+                  className={`max-w-[80%] sm:max-w-[70%] rounded-2xl px-4 py-2 ${
+                    message.type === 'user' 
+                      ? 'bg-orange-500 text-white rounded-br-none' 
+                      : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                  }`}
+                >
+                  <p className="text-sm">{message.content}</p>
+                  <p className={`text-right text-xs mt-1 ${
+                    message.type === 'user' ? 'text-orange-100' : 'text-gray-500'
+                  }`}>
+                    {message.timestamp}
+                  </p>
+                </div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          
+          {/* Input Area */}
+          <div className="border-t border-gray-100 p-4">
+            <div className="flex items-center">
+              <div className="flex space-x-2 mr-2">
+                <button className="text-gray-400 hover:text-gray-600">
+                  <MicrophoneIcon className="h-5 w-5" />
+                </button>
+                <button className="text-gray-400 hover:text-gray-600">
+                  <PhotographIcon className="h-5 w-5" />
+                </button>
+                <button className="text-gray-400 hover:text-gray-600">
+                  <DocumentTextIcon className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                placeholder="Type your message..."
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              
+              <button
+                onClick={handleSend}
+                disabled={input.trim() === ''}
+                className={`ml-2 h-10 w-10 rounded-full flex items-center justify-center ${
+                  input.trim() === '' 
+                    ? 'bg-gray-100 text-gray-400' 
+                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                }`}
+              >
+                <PaperAirplaneIcon className="h-5 w-5 transform rotate-90" />
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+      
+      {/* Footer timestamp */}
+      <div className="mt-8 text-xs text-center text-gray-400">
+        Last updated: {user.dateTime} • User: {user.name}
+      </div>
     </div>
   );
 };

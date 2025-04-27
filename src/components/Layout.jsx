@@ -51,7 +51,7 @@ const Layout = () => {
         <div className={`flex flex-col flex-1 transition-all duration-300 ${
           isSidebarCollapsed ? 'md:ml-20' : 'md:ml-64'
         }`}>
-          <main className="flex-1 p-4 sm:p-6 lg:p-8">
+          <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8">
             <Outlet />
           </main>
           
