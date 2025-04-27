@@ -132,42 +132,30 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl overflow-hidden shadow-lg"
+          className="bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl shadow-lg overflow-hidden text-white"
         >
-          <div className="p-4 text-white">
-            <div className="flex flex-col md:flex-row md:items-center justify-between">
-              <div className="mb-4 md:mb-0 md:pr-6">
-                <h2 className="text-lg font-bold mb-2">Upgrade to Premium</h2>
-                <p className="text-white/80 mb-3 text-sm">
-                  Get access to unlimited product listings, AI-powered pricing recommendations, 
-                  and multi-channel selling capabilities.
+          <div className="p-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-base font-bold">Sell on Global Marketplaces</h3>
+                <p className="mt-1 text-white/80 text-xs">
+                  Expand your reach by listing your products on Amazon, Flipkart, and more.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <button 
-                    onClick={(e) => handleNavigation('/pricing', e)}
-                    className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
-                  >
-                    View Pricing Plans
-                  </button>
-                  <button 
-                    onClick={(e) => handleNavigation('/profile', e)}
-                    className="bg-transparent border border-white text-white px-3 py-1.5 rounded-lg font-medium hover:bg-white/10 text-center text-sm"
-                  >
-                    Learn More
-                  </button>
-                </div>
+                <button 
+                  onClick={(e) => handleNavigation('/marketplace', e)}
+                  className="mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
+                >
+                  Explore Marketplaces
+                </button>
               </div>
               <div className="hidden md:block">
-                <div className="h-20 w-20 rounded-full bg-white/20 flex items-center justify-center">
-                  <CurrencyRupeeIcon className="h-10 w-10 text-white" />
-                </div>
+                <GiftIcon className="h-16 w-16 text-white/20" />
               </div>
             </div>
           </div>
         </motion.div>
       </div>
       
-      {/* The rest of your component remains the same */}
       {/* Hero Carousel - Upcoming Sales */}
       <div className="mb-4">
         <div className="flex justify-between items-center mb-3">
@@ -216,24 +204,35 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl shadow-lg overflow-hidden text-white"
+          className="bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl overflow-hidden shadow-lg"
         >
-          <div className="p-4">
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="text-base font-bold">Sell on Global Marketplaces</h3>
-                <p className="mt-1 text-white/80 text-xs">
-                  Expand your reach by listing your products on Amazon, Flipkart, and more.
+          <div className="p-4 text-white">
+            <div className="flex flex-col md:flex-row md:items-center justify-between">
+              <div className="mb-4 md:mb-0 md:pr-6">
+                <h2 className="text-lg font-bold mb-2">Upgrade to Premium</h2>
+                <p className="text-white/80 mb-3 text-sm">
+                  Get access to unlimited product listings, AI-powered pricing recommendations, 
+                  and multi-channel selling capabilities.
                 </p>
-                <button 
-                  onClick={(e) => handleNavigation('/marketplace', e)}
-                  className="mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
-                >
-                  Explore Marketplaces
-                </button>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <button 
+                    onClick={(e) => handleNavigation('/pricing', e)}
+                    className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
+                  >
+                    View Pricing Plans
+                  </button>
+                  <button 
+                    onClick={(e) => handleNavigation('/profile', e)}
+                    className="bg-transparent border border-white text-white px-3 py-1.5 rounded-lg font-medium hover:bg-white/10 text-center text-sm"
+                  >
+                    Learn More
+                  </button>
+                </div>
               </div>
               <div className="hidden md:block">
-                <GiftIcon className="h-16 w-16 text-white/20" />
+                <div className="h-20 w-20 rounded-full bg-white/20 flex items-center justify-center">
+                  <CurrencyRupeeIcon className="h-10 w-10 text-white" />
+                </div>
               </div>
             </div>
           </div>
