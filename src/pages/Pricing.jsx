@@ -8,12 +8,9 @@ const Pricing = () => {
   const { user } = useUser();
   const [billingPeriod, setBillingPeriod] = useState("yearly"); // yearly or monthly
   
-  // Update the current time
+  // Update the current time if needed
   React.useEffect(() => {
-    // This would normally be handled by a timer or context, but we'll update it here for consistency
-    if (user.dateTime !== "2025-04-27 12:24:06") {
-      // In a real app, you'd use updateDateTime function from context
-    }
+    // This would be handled by the UserContext in a real app
   }, []);
   
   const pricingPlans = [
@@ -23,8 +20,8 @@ const Pricing = () => {
       monthlyPrice: 599,
       yearlyPrice: 5990,
       savePercent: 17,
-      color: "bg-blue-500",
-      gradient: "from-blue-500 to-blue-600",
+      color: "bg-gray-500",
+      gradient: "from-gray-500 to-gray-600",
       popular: false,
       features: [
         { name: "Up to 50 product listings", included: true },
@@ -45,8 +42,8 @@ const Pricing = () => {
       monthlyPrice: 1499,
       yearlyPrice: 14990,
       savePercent: 17,
-      color: "bg-orange-500",
-      gradient: "from-orange-500 to-amber-500",
+      color: "bg-gray-600",
+      gradient: "from-gray-600 to-gray-700",
       popular: true,
       features: [
         { name: "Unlimited product listings", included: true },
@@ -74,7 +71,7 @@ const Pricing = () => {
     {
       name: "Advanced Analytics",
       description: "Get deep insights into your sales, customer behavior, and product performance with our powerful analytics tools.",
-      icon: <ChartBarIcon className="h-5 w-5 md:h-6 md:w-6 text-orange-500" />
+      icon: <ChartBarIcon className="h-5 w-5 md:h-6 md:w-6 text-gray-600" />
     },
     {
       name: "AI-Powered Recommendations",
@@ -96,7 +93,7 @@ const Pricing = () => {
       </div>
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-orange-500 via-amber-500 to-orange-400 rounded-xl overflow-hidden mb-4 md:mb-6">
+      <div className="bg-gradient-to-br from-gray-600 via-gray-700 to-gray-600 rounded-xl overflow-hidden mb-4 md:mb-6">
         <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 text-white text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -120,7 +117,7 @@ const Pricing = () => {
           >
             <a 
               href="#pricing-plans" 
-              className="bg-white text-orange-500 px-4 md:px-6 py-1.5 md:py-2 rounded-lg font-medium hover:bg-white/90 shadow-md text-sm"
+              className="bg-white text-gray-700 px-4 md:px-6 py-1.5 md:py-2 rounded-lg font-medium hover:bg-white/90 shadow-md text-sm"
             >
               View Plans
             </a>
@@ -135,7 +132,7 @@ const Pricing = () => {
             onClick={() => setBillingPeriod("monthly")}
             className={`px-2.5 md:px-4 py-1.5 text-xs md:text-sm font-medium rounded-md ${
               billingPeriod === "monthly"
-                ? "bg-orange-500 text-white"
+                ? "bg-gray-600 text-white"
                 : "text-gray-700 hover:bg-gray-100"
             }`}
           >
@@ -145,7 +142,7 @@ const Pricing = () => {
             onClick={() => setBillingPeriod("yearly")}
             className={`px-2.5 md:px-4 py-1.5 text-xs md:text-sm font-medium rounded-md flex items-center ${
               billingPeriod === "yearly"
-                ? "bg-orange-500 text-white"
+                ? "bg-gray-600 text-white"
                 : "text-gray-700 hover:bg-gray-100"
             }`}
           >
@@ -166,14 +163,14 @@ const Pricing = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             className={`bg-white rounded-xl shadow-lg overflow-hidden ${
-              plan.popular ? 'ring-2 md:ring-4 ring-orange-500/30' : ''
+              plan.popular ? 'ring-2 md:ring-4 ring-gray-500/30' : ''
             }`}
           >
             {/* Plan header */}
             <div className={`bg-gradient-to-r ${plan.gradient} p-3 md:p-4 text-white relative overflow-hidden`}>
               {plan.popular && (
                 <div className="absolute top-0 right-0">
-                  <div className="bg-white text-orange-500 text-[10px] md:text-xs font-bold px-1.5 md:px-2 py-0.5 rounded-bl-lg shadow-md">
+                  <div className="bg-white text-gray-700 text-[10px] md:text-xs font-bold px-1.5 md:px-2 py-0.5 rounded-bl-lg shadow-md">
                     MOST POPULAR
                   </div>
                 </div>
@@ -292,7 +289,7 @@ const Pricing = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl overflow-hidden"
+        className="bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl overflow-hidden"
       >
         <div className="max-w-4xl mx-auto px-4 py-6 md:py-10 text-white text-center">
           <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-3">Ready to grow your business?</h2>
@@ -300,7 +297,7 @@ const Pricing = () => {
             Join thousands of sellers who have transformed their business with our platform. Start your free trial today!
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-2 md:gap-4">
-            <button className="w-full sm:w-auto bg-white text-blue-600 px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-white/90 shadow-lg text-sm">
+            <button className="w-full sm:w-auto bg-white text-gray-700 px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-white/90 shadow-lg text-sm">
               Start Free Trial
             </button>
             <button className="w-full sm:w-auto bg-transparent border border-white text-white px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-white/10 text-sm mt-2 sm:mt-0">

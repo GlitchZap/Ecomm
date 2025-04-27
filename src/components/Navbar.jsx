@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { 
   MenuIcon, 
   SearchIcon, 
@@ -15,7 +15,6 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   const { user } = useUser();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showInbox, setShowInbox] = useState(false);
-  const navigate = useNavigate();
   
   // Close other dropdowns when one is opened
   const handleToggleNotifications = () => {
@@ -29,7 +28,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   };
   
   return (
-    <header className="bg-gradient-to-r from-orange-500 to-amber-500 shadow-md fixed top-0 left-0 right-0 z-50 h-16">
+    <header className="bg-gradient-to-r from-gray-600 to-gray-700 shadow-md fixed top-0 left-0 right-0 z-50 h-16">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           {/* Left section */}
@@ -41,14 +40,14 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
             >
               <MenuIcon className="h-6 w-6" />
             </button>
-            <Link to="/home" className="flex items-center ml-1 md:ml-0">
+            <NavLink to="/home" className="flex items-center ml-1 md:ml-0">
               <img 
                 src="https://ui-avatars.com/api/?name=V+H&background=random&color=fff"
                 className="h-8 w-8 rounded-md mr-1 sm:mr-2" 
                 alt="VendorHub"
               />
               <span className="text-white font-bold text-lg sm:text-xl">VendorHub</span>
-            </Link>
+            </NavLink>
           </div>
           
           {/* Search bar */}
@@ -92,7 +91,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
               <ShoppingCartIcon className="h-5 w-5" />
             </button>
             
-            <Link to="/profile" className="flex items-center ml-1 sm:ml-0">
+            <NavLink to="/profile" className="flex items-center ml-1 sm:ml-0">
               <div className="flex items-center">
                 <img
                   className="h-8 w-8 rounded-full border-2 border-white"
@@ -101,7 +100,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
                 />
                 <span className="ml-2 text-white text-sm font-medium hidden md:block">{user.name}</span>
               </div>
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const Home = () => {
   
   // Update current time
   React.useEffect(() => {
-    updateDateTime("2025-04-27 12:36:07");
+    updateDateTime("2025-04-27 19:06:31");
   }, [updateDateTime]);
   
   const upcomingSales = [
@@ -27,7 +27,7 @@ const Home = () => {
       description: "Boost your sales during the festival of lights. Register now!",
       date: "Starts Oct 15, 2025",
       image: "https://images.unsplash.com/photo-1593941707882-a56bbc8ba7dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-      color: "from-orange-500 to-amber-500",
+      color: "from-gray-600 to-gray-700",
     },
     {
       id: 2,
@@ -126,7 +126,7 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl overflow-hidden shadow-lg"
+          className="bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl overflow-hidden shadow-lg"
         >
           <div className="p-4 text-white">
             <div className="flex flex-col md:flex-row md:items-center justify-between">
@@ -139,7 +139,7 @@ const Home = () => {
                 <div className="flex flex-col sm:flex-row gap-2">
                   <Link 
                     to="/pricing" 
-                    className="bg-white text-blue-600 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
+                    className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
                   >
                     View Pricing Plans
                   </Link>
@@ -165,7 +165,7 @@ const Home = () => {
       <div className="mb-4">
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-lg font-bold text-gray-800">Upcoming Sales Events</h2>
-          <button className="text-xs text-orange-500 hover:text-orange-600 flex items-center">
+          <button className="text-xs text-gray-600 hover:text-gray-800 flex items-center">
             View All <ChevronRightIcon className="h-3 w-3 ml-1" />
           </button>
         </div>
@@ -209,7 +209,7 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl shadow-lg overflow-hidden text-white"
+          className="bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl shadow-lg overflow-hidden text-white"
         >
           <div className="p-4">
             <div className="flex items-start justify-between">
@@ -220,7 +220,7 @@ const Home = () => {
                 </p>
                 <button 
                   onClick={() => navigate('/marketplace')}
-                  className="mt-2 bg-white text-orange-500 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
+                  className="mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
                 >
                   Explore Marketplaces
                 </button>
@@ -257,7 +257,7 @@ const Home = () => {
               ))}
             </div>
             
-            <button className="mt-2 text-orange-500 text-xs font-medium hover:text-orange-600">
+            <button className="mt-2 text-gray-600 text-xs font-medium hover:text-gray-800">
               View All Trends
             </button>
           </div>
@@ -279,7 +279,7 @@ const Home = () => {
             ].map((activity, index) => (
               <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                 <div className="flex items-start max-w-[60%]">
-                  <div className="h-2 w-2 mt-1.5 rounded-full bg-orange-500 mr-2 flex-shrink-0"></div>
+                  <div className="h-2 w-2 mt-1.5 rounded-full bg-gray-500 mr-2 flex-shrink-0"></div>
                   <div>
                     <p className="text-xs font-medium text-gray-800 truncate">{activity.event}</p>
                     <p className="text-[10px] text-gray-500 mt-0.5 truncate">{activity.product}</p>
@@ -293,7 +293,7 @@ const Home = () => {
             ))}
           </div>
           
-          <button className="mt-2 text-orange-500 text-xs font-medium hover:text-orange-600">
+          <button className="mt-2 text-gray-600 text-xs font-medium hover:text-gray-800">
             View All Activity
           </button>
         </div>
@@ -316,7 +316,7 @@ const Home = () => {
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {["AI Analytics", "Priority Support", "Unlimited Products"].map((feature, i) => (
-                  <span key={i} className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-[10px] font-medium">
+                  <span key={i} className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-[10px] font-medium">
                     {feature}
                   </span>
                 ))}
@@ -325,7 +325,7 @@ const Home = () => {
             <div className="flex-shrink-0">
               <Link 
                 to="/pricing" 
-                className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm text-xs"
+                className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm text-xs"
               >
                 View Plans
               </Link>

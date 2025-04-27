@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { 
   HomeIcon, 
   ShoppingBagIcon, 
@@ -18,7 +18,6 @@ import { useUser } from "../context/UserContext";
 
 const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
   const { user } = useUser();
-  const location = useLocation();
   const navigate = useNavigate();
   
   const handleLogout = () => {
@@ -47,7 +46,7 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
     { name: "Marketplace", icon: <ShoppingBagIcon className="h-5 w-5" />, path: "/marketplace" },
     { name: "Dashboard", icon: <ChartBarIcon className="h-5 w-5" />, path: "/dashboard" },
     { name: "AI Support", icon: <LightBulbIcon className="h-5 w-5" />, path: "/ai-support" },
-    { name: "Our Plans", icon: <CurrencyRupeeIcon className="h-5 w-5" />, path: "/pricing" },
+    { name: "Pricing Plans", icon: <CurrencyRupeeIcon className="h-5 w-5" />, path: "/pricing" },
     { name: "Profile", icon: <UserIcon className="h-5 w-5" />, path: "/profile" },
     { 
       name: "Settings", 
@@ -100,56 +99,49 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
         </div>
       </div>
       
-      {/* Search */}
-      {!collapsed && (
-        <div className="px-4 py-3">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full bg-gray-100 rounded-lg pl-8 pr-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {/* Navigation - no scrollbar */}
-      <div className="flex-1 py-2">
+      {/* Navigation Menu */}
+      <div className="flex-1 py-2 overflow-y-auto">
         <nav className={`${collapsed ? 'flex flex-col items-center' : 'space-y-1 px-2'}`}>
           {menuItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              onClick={(e) => {
-                if (item.onClick) {
-                  e.preventDefault();
-                  item.onClick();
-                }
-                if (window.innerWidth < 768) {
-                  setIsOpen(false);
-                }
-              }}
-              className={`${
-                collapsed 
-                  ? 'w-12 h-12 my-2 rounded-lg flex items-center justify-center' 
-                  : 'flex items-center px-4 py-2 rounded-md text-sm font-medium'
-              } ${
-                location.pathname === item.path
-                  ? collapsed 
-                    ? "bg-orange-50 text-orange-500" 
-                    : "bg-orange-50 text-orange-500"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-              }`}
-              title={collapsed ? item.name : ''}
-            >
-              <span className={collapsed ? '' : 'mr-3'}>{item.icon}</span>
-              {!collapsed && <span>{item.name}</span>}
-            </Link>
+            item.onClick ? (
+              <button
+                key={item.name}
+                onClick={item.onClick}
+                className={`${
+                  collapsed 
+                    ? 'w-12 h-12 my-2 rounded-lg flex items-center justify-center' 
+                    : 'flex items-center px-4 py-2 rounded-md text-sm font-medium w-full text-left'
+                } text-gray-600 hover:bg-gray-50 hover:text-gray-900`}
+                title={collapsed ? item.name : ''}
+              >
+                <span className={collapsed ? '' : 'mr-3'}>{item.icon}</span>
+                {!collapsed && <span>{item.name}</span>}
+              </button>
+            ) : (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                end={item.path === "/home"}
+                className={({ isActive }) => `${
+                  collapsed 
+                    ? 'w-12 h-12 my-2 rounded-lg flex items-center justify-center' 
+                    : 'flex items-center px-4 py-2 rounded-md text-sm font-medium'
+                } ${
+                  isActive
+                    ? "bg-gray-100 text-gray-800" 
+                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                }`}
+                onClick={() => {
+                  if (window.innerWidth < 768) {
+                    setIsOpen(false);
+                  }
+                }}
+                title={collapsed ? item.name : ''}
+              >
+                <span className={collapsed ? '' : 'mr-3'}>{item.icon}</span>
+                {!collapsed && <span>{item.name}</span>}
+              </NavLink>
+            )
           ))}
         </nav>
       </div>
@@ -183,7 +175,7 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
               collapsed 
                 ? 'w-12 h-12 rounded-lg flex items-center justify-center mx-auto my-2' 
                 : 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none'
-            } ${false ? 'bg-orange-500' : 'bg-gray-200'}`}
+            } ${false ? 'bg-gray-600' : 'bg-gray-200'}`}
             title={collapsed ? "Dark Mode" : ''}
           >
             {collapsed ? (
