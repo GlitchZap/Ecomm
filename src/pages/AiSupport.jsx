@@ -105,7 +105,7 @@ const AiSupport = () => {
                   onClick={() => setActiveCategory(category.id)}
                   className={`w-full flex items-center px-3 py-2 rounded-lg text-sm ${
                     activeCategory === category.id
-                      ? 'bg-orange-50 text-orange-600'
+                      ? 'bg-blue-50 text-blue-600'
                       : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
@@ -148,11 +148,11 @@ const AiSupport = () => {
           {/* Chat Header */}
           <div className="border-b border-gray-100 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center">
-                <LightBulbIcon className="h-5 w-5 text-orange-500" />
+              <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                <LightBulbIcon className="h-5 w-5 text-blue-500" />
               </div>
               <div className="ml-2">
-                <p className="text-sm font-medium text-gray-800">VendorHub AI Assistant</p>
+                <p className="text-sm font-medium text-gray-800">Sumimaase AI Assistant</p>
                 <p className="text-xs text-green-500">Online</p>
               </div>
             </div>
@@ -173,13 +173,13 @@ const AiSupport = () => {
                 <div 
                   className={`max-w-[80%] sm:max-w-[70%] rounded-2xl px-4 py-2 ${
                     message.type === 'user' 
-                      ? 'bg-orange-500 text-white rounded-br-none' 
+                      ? 'bg-blue-500 text-white rounded-br-none' 
                       : 'bg-gray-100 text-gray-800 rounded-bl-none'
                   }`}
                 >
                   <p className="text-sm">{message.content}</p>
                   <p className={`text-right text-xs mt-1 ${
-                    message.type === 'user' ? 'text-orange-100' : 'text-gray-500'
+                    message.type === 'user' ? 'text-blue-100' : 'text-gray-500'
                   }`}>
                     {message.timestamp}
                   </p>
@@ -210,7 +210,7 @@ const AiSupport = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Type your message..."
-                className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               
               <button
@@ -219,7 +219,7 @@ const AiSupport = () => {
                 className={`ml-2 h-10 w-10 rounded-full flex items-center justify-center ${
                   input.trim() === '' 
                     ? 'bg-gray-100 text-gray-400' 
-                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                    : 'bg-blue-500 text-white hover:bg-blue-600'
                 }`}
               >
                 <PaperAirplaneIcon className="h-5 w-5 transform rotate-90" />

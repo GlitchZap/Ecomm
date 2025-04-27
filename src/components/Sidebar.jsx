@@ -22,7 +22,7 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
   
   const handleLogout = () => {
     alert("Logging out...");
-    navigate("/");
+    navigate("/", { replace: true });
   };
   
   const handleSettings = () => {
@@ -39,6 +39,14 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
   
   const toggleDarkMode = () => {
     alert("Dark mode will be implemented in future updates!");
+  };
+  
+  const handleNavigation = (path, onClick) => {
+    if (onClick) {
+      onClick();
+    } else {
+      navigate(path, { replace: true });
+    }
   };
   
   const menuItems = [
@@ -99,52 +107,35 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
         </div>
       </div>
       
-      {/* Navigation Menu */}
-      <div className="flex-1 py-2 overflow-y-auto">
-        <nav className={`${collapsed ? 'flex flex-col items-center' : 'space-y-1 px-2'}`}>
+      {/* Navigation menu */}
+      <nav className="flex-1 overflow-y-auto py-4">
+        <ul className="space-y-1">
           {menuItems.map((item) => (
-            item.onClick ? (
-              <button
-                key={item.name}
-                onClick={item.onClick}
-                className={`${
-                  collapsed 
-                    ? 'w-12 h-12 my-2 rounded-lg flex items-center justify-center' 
-                    : 'flex items-center px-4 py-2 rounded-md text-sm font-medium w-full text-left'
-                } text-gray-600 hover:bg-gray-50 hover:text-gray-900`}
-                title={collapsed ? item.name : ''}
-              >
-                <span className={collapsed ? '' : 'mr-3'}>{item.icon}</span>
-                {!collapsed && <span>{item.name}</span>}
-              </button>
-            ) : (
+            <li key={item.name}>
               <NavLink
-                key={item.name}
                 to={item.path}
-                end={item.path === "/home"}
-                className={({ isActive }) => `${
-                  collapsed 
-                    ? 'w-12 h-12 my-2 rounded-lg flex items-center justify-center' 
-                    : 'flex items-center px-4 py-2 rounded-md text-sm font-medium'
-                } ${
-                  isActive
-                    ? "bg-gray-100 text-gray-800" 
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                }`}
-                onClick={() => {
-                  if (window.innerWidth < 768) {
-                    setIsOpen(false);
-                  }
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation(item.path, item.onClick);
                 }}
-                title={collapsed ? item.name : ''}
+                className={({ isActive }) => `
+                  flex items-center px-4 py-2 text-sm font-medium
+                  ${isActive 
+                    ? 'bg-blue-50 text-blue-600' 
+                    : 'text-gray-600 hover:bg-gray-50'
+                  }
+                  ${collapsed ? 'justify-center' : ''}
+                `}
               >
-                <span className={collapsed ? '' : 'mr-3'}>{item.icon}</span>
-                {!collapsed && <span>{item.name}</span>}
+                <span className={`${!collapsed ? 'mr-3' : ''}`}>
+                  {item.icon}
+                </span>
+                {!collapsed && item.name}
               </NavLink>
-            )
+            </li>
           ))}
-        </nav>
-      </div>
+        </ul>
+      </nav>
       
       {/* Bottom section */}
       <div className={`mt-auto ${collapsed ? 'px-2 pb-4' : 'px-4 py-4'} border-t border-gray-100`}>

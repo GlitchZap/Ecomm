@@ -25,7 +25,7 @@ const Pricing = () => {
       popular: false,
       features: [
         { name: "Up to 50 product listings", included: true },
-        { name: "VendorHub store", included: true },
+        { name: "Sumimaase store", included: true },
         { name: "Basic analytics dashboard", included: true },
         { name: "Email support", included: true },
         { name: "Single marketplace integration", included: true },
@@ -47,7 +47,7 @@ const Pricing = () => {
       popular: true,
       features: [
         { name: "Unlimited product listings", included: true },
-        { name: "VendorHub store", included: true },
+        { name: "Sumimaase store", included: true },
         { name: "Advanced analytics dashboard", included: true },
         { name: "Priority email & chat support", included: true },
         { name: "Multiple marketplace integrations", included: true },
@@ -65,7 +65,7 @@ const Pricing = () => {
       name: "Global Marketplace Access",
       description: "Sell your products on international platforms like Amazon, Flipkart, and more with seamless integration.",
       icon: <svg className="h-5 w-5 md:h-6 md:w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5a2.5 2.5 0 002.5-2.5V3.935" />
       </svg>
     },
     {
@@ -93,7 +93,7 @@ const Pricing = () => {
       </div>
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-gray-600 via-gray-700 to-gray-600 rounded-xl overflow-hidden mb-4 md:mb-6">
+      <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 rounded-xl overflow-hidden mb-4 md:mb-6">
         <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 text-white text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -108,7 +108,7 @@ const Pricing = () => {
             transition={{ delay: 0.1 }}
             className="text-sm md:text-base opacity-90 mb-4 md:mb-6 max-w-2xl mx-auto"
           >
-            Unlock the power of global marketplaces with VendorHub's seller platform. Simple pricing, powerful features.
+            Unlock the power of global marketplaces with Sumimaase's seller platform. Simple pricing, powerful features.
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -117,7 +117,7 @@ const Pricing = () => {
           >
             <a 
               href="#pricing-plans" 
-              className="bg-white text-gray-700 px-4 md:px-6 py-1.5 md:py-2 rounded-lg font-medium hover:bg-white/90 shadow-md text-sm"
+              className="bg-white text-blue-600 px-4 md:px-6 py-1.5 md:py-2 rounded-lg font-medium hover:bg-blue-50 shadow-md text-sm"
             >
               View Plans
             </a>
@@ -154,8 +154,8 @@ const Pricing = () => {
         </div>
       </div>
       
-      {/* Pricing Cards */}
-      <div className="grid grid-cols-1 gap-4 md:gap-6 mb-4 md:mb-6">
+      {/* Pricing Cards - Changed to grid with 2 columns on all screen sizes */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
         {pricingPlans.map((plan, index) => (
           <motion.div
             key={plan.name}
@@ -167,7 +167,7 @@ const Pricing = () => {
             }`}
           >
             {/* Plan header */}
-            <div className={`bg-gradient-to-r ${plan.gradient} p-3 md:p-4 text-white relative overflow-hidden`}>
+            <div className={`bg-gradient-to-r from-blue-800 to-indigo-900 p-3 md:p-4 text-white relative overflow-hidden`}>
               {plan.popular && (
                 <div className="absolute top-0 right-0">
                   <div className="bg-white text-gray-700 text-[10px] md:text-xs font-bold px-1.5 md:px-2 py-0.5 rounded-bl-lg shadow-md">
@@ -198,7 +198,7 @@ const Pricing = () => {
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start">
                     {feature.included ? (
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-1.5 flex-shrink-0 mt-0.5" />
+                      <CheckIcon className="h-4 w-4 text-blue-500 mr-1.5 flex-shrink-0 mt-0.5" />
                     ) : (
                       <XIcon className="h-4 w-4 text-gray-300 mr-1.5 flex-shrink-0 mt-0.5" />
                     )}
@@ -209,7 +209,7 @@ const Pricing = () => {
                 ))}
               </ul>
               
-              <button className={`w-full mt-4 md:mt-6 py-2 rounded-lg font-medium text-white bg-gradient-to-r ${plan.gradient} hover:opacity-90 shadow-md text-sm`}>
+              <button className={`w-full mt-4 md:mt-6 py-2 rounded-lg font-medium text-white bg-gradient-to-r from-blue-800 to-indigo-900 hover:opacity-90 shadow-md text-sm`}>
                 {plan.popular ? 'Get Started Now' : 'Start Free Trial'}
               </button>
               
@@ -262,15 +262,15 @@ const Pricing = () => {
           {[
             {
               question: "Can I upgrade or downgrade my plan later?",
-              answer: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. When downgrading, the changes will take effect at the start of your next billing cycle."
+              answer: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. When downgrading, the changes will take effect at the end of your current billing cycle."
             },
             {
               question: "How does the 14-day free trial work?",
-              answer: "You can try any plan for 14 days without providing a credit card. At the end of the trial, you can choose to subscribe or your account will be automatically downgraded to a limited free version."
+              answer: "You can try any plan for 14 days without providing a credit card. At the end of the trial, you can choose to subscribe or your account will be automatically downgraded to a free plan.",
             },
             {
               question: "Which marketplaces can I integrate with?",
-              answer: "Our Premium plan supports integrations with Amazon, Flipkart, Meesho, Shopify, WooCommerce, Magento, and more. The Basic plan allows integration with one marketplace of your choice."
+              answer: "Our Premium plan supports integrations with Amazon, Flipkart, Meesho, Shopify, WooCommerce, Magento, and more. The Basic plan allows integration with one marketplace of your choice.",
             },
             {
               question: "Do you offer custom enterprise solutions?",
@@ -289,7 +289,7 @@ const Pricing = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl overflow-hidden"
+        className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden"
       >
         <div className="max-w-4xl mx-auto px-4 py-6 md:py-10 text-white text-center">
           <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-3">Ready to grow your business?</h2>
@@ -297,10 +297,10 @@ const Pricing = () => {
             Join thousands of sellers who have transformed their business with our platform. Start your free trial today!
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-2 md:gap-4">
-            <button className="w-full sm:w-auto bg-white text-gray-700 px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-white/90 shadow-lg text-sm">
+            <button className="w-full sm:w-auto bg-white text-blue-600 px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-blue-50 shadow-lg text-sm">
               Start Free Trial
             </button>
-            <button className="w-full sm:w-auto bg-transparent border border-white text-white px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-white/10 text-sm mt-2 sm:mt-0">
+            <button className="w-full sm:w-auto bg-transparent border border-blue-600 text-blue-600 px-4 md:px-6 py-2 rounded-lg font-medium hover:bg-blue-50 text-sm mt-2 sm:mt-0">
               Contact Sales
             </button>
           </div>

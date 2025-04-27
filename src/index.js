@@ -1,19 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // <-- NOTICE this change!
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-
 
 // Importing TailwindCSS and other styles
 import './tailwind.css';
 
-// ✅ New React 18 style
+// Create root
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    
-      <App />
-    
+    <App />
   </React.StrictMode>
 );

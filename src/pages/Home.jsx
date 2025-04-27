@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import { 
   TrendingUpIcon, 
@@ -17,7 +17,7 @@ const Home = () => {
   
   // Update current time
   React.useEffect(() => {
-    updateDateTime("2025-04-27 19:06:31");
+    updateDateTime("2025-04-27 20:10:03");
   }, [updateDateTime]);
   
   const upcomingSales = [
@@ -70,6 +70,12 @@ const Home = () => {
       icon: <CashIcon className="h-5 w-5 text-yellow-500" />,
     },
   ];
+
+  // Navigation handler
+  const handleNavigation = (path, e) => {
+    if (e) e.preventDefault();
+    navigate(path);
+  };
   
   return (
     <div>
@@ -137,18 +143,18 @@ const Home = () => {
                   and multi-channel selling capabilities.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <Link 
-                    to="/pricing" 
+                  <button 
+                    onClick={(e) => handleNavigation('/pricing', e)}
                     className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
                   >
                     View Pricing Plans
-                  </Link>
-                  <Link 
-                    to="/profile" 
+                  </button>
+                  <button 
+                    onClick={(e) => handleNavigation('/profile', e)}
                     className="bg-transparent border border-white text-white px-3 py-1.5 rounded-lg font-medium hover:bg-white/10 text-center text-sm"
                   >
                     Learn More
-                  </Link>
+                  </button>
                 </div>
               </div>
               <div className="hidden md:block">
@@ -161,6 +167,7 @@ const Home = () => {
         </motion.div>
       </div>
       
+      {/* The rest of your component remains the same */}
       {/* Hero Carousel - Upcoming Sales */}
       <div className="mb-4">
         <div className="flex justify-between items-center mb-3">
@@ -219,7 +226,7 @@ const Home = () => {
                   Expand your reach by listing your products on Amazon, Flipkart, and more.
                 </p>
                 <button 
-                  onClick={() => navigate('/marketplace')}
+                  onClick={(e) => handleNavigation('/marketplace', e)}
                   className="mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
                 >
                   Explore Marketplaces
@@ -323,12 +330,12 @@ const Home = () => {
               </div>
             </div>
             <div className="flex-shrink-0">
-              <Link 
-                to="/pricing" 
+              <button
+                onClick={(e) => handleNavigation('/pricing', e)}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm text-xs"
               >
                 View Plans
-              </Link>
+              </button>
             </div>
           </div>
         </div>

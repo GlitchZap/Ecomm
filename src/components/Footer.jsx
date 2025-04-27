@@ -10,7 +10,7 @@ const Footer = ({ className = "" }) => {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">VendorHub</h3>
+            <h3 className="text-lg font-semibold mb-4">Sumimaase</h3>
             <p className="text-gray-400 text-sm">
               Empowering small-town sellers to go online easily and reach customers globally.
             </p>
@@ -55,7 +55,7 @@ const Footer = ({ className = "" }) => {
               <li><a href="#" className="hover:text-white">Flipkart Integration</a></li>
               <li><a href="#" className="hover:text-white">Meesho Integration</a></li>
               <li><a href="#" className="hover:text-white">Shopify Integration</a></li>
-              <li><a href="#" className="hover:text-white">VendorHub Marketplace</a></li>
+              <li><a href="#" className="hover:text-white">Sumimaase Marketplace</a></li>
             </ul>
           </div>
           
@@ -64,15 +64,15 @@ const Footer = ({ className = "" }) => {
             <ul className="space-y-2 text-sm text-gray-400">
               <li className="flex items-start">
                 <span className="mr-2">📧</span>
-                <span>support@vendorhub.com</span>
+                <span>support@sumimaase.com</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2">📱</span>
-                <span>+91 9876543210</span>
+                <span>+91 9265380320</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2">🏙️</span>
-                <span>123 Commerce Street, Digital Park, Tech City 500001</span>
+                <span>Plot no. 121/122, Ambaji City, Varsamedi, Kutch District, Gujarat - 370110</span>
               </li>
             </ul>
             <div className="mt-4">
@@ -85,7 +85,7 @@ const Footer = ({ className = "" }) => {
         
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400">
-            © 2025 VendorHub. All rights reserved.
+            © 2025 Sumimaase. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6 text-sm text-gray-400">
             <a href="#" className="hover:text-white">Privacy Policy</a>

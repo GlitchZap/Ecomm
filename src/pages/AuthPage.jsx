@@ -89,12 +89,12 @@ const AuthPage = () => {
         <div className="bg-gradient-to-r from-gray-600 to-gray-700 text-white p-6 text-center">
           <div className="flex items-center justify-center mb-3">
             <img 
-              src="https://ui-avatars.com/api/?name=V+H&background=random&color=fff"
+              src="https://ui-avatars.com/api/?name=S+M&background=random&color=fff"
               className="h-12 w-12 rounded-md mr-2" 
-              alt="VendorHub"
+              alt="Sumimaase"
             />
           </div>
-          <h1 className="text-2xl font-bold mb-1">VendorHub</h1>
+          <h1 className="text-2xl font-bold mb-1">Sumimaase</h1>
           <p className="text-white/80 text-sm">The Ultimate Seller Platform</p>
         </div>
         
@@ -227,7 +227,7 @@ const AuthPage = () => {
                   required
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  This code is provided by the VendorHub system administrator.
+                  This code is provided by the Sumimaase system administrator.
                 </p>
               </div>
             )}
@@ -420,7 +420,7 @@ const AuthPage = () => {
           
           {/* Footer */}
           <div className="mt-6 text-center text-xs text-gray-500">
-            <p>© 2025 VendorHub. All rights reserved.</p>
+            <p>© 2025 Sumimaase. All rights reserved.</p>
             <p className="mt-1">
               Current Date and Time (UTC): 2025-04-27 19:21:55 • Current User's Login: GlitchZap
             </p>

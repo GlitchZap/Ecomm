@@ -88,7 +88,7 @@ const Marketplace = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl overflow-hidden mb-8"
+        className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl overflow-hidden mb-8"
       >
         <div className="max-w-4xl mx-auto px-6 py-12 text-white">
           <h1 className="text-3xl font-bold mb-4">Expand Your Reach with Global Marketplaces</h1>
@@ -97,7 +97,7 @@ const Marketplace = () => {
             with just a few clicks. No technical setup required!
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/pricing" className="bg-white text-orange-500 px-6 py-2 rounded-lg font-medium hover:bg-white/90">
+            <Link to="/pricing" className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50">
               Get Started
             </Link>
             <button className="bg-transparent border border-white text-white px-6 py-2 rounded-lg font-medium hover:bg-white/10">
@@ -115,10 +115,10 @@ const Marketplace = () => {
           className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-full"
         >
           <div className="p-6">
-            <div className="h-12 w-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-              <ShoppingBagIcon className="h-6 w-6 text-orange-500" />
+            <div className="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+              <ShoppingBagIcon className="h-6 w-6 text-blue-500" />
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Sell on VendorHub</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Sell on Sumimaase</h3>
             <p className="text-gray-600 mb-4">
               List your products directly on our marketplace and reach local customers with zero commission fees.
             </p>
@@ -138,8 +138,8 @@ const Marketplace = () => {
                 </li>
               ))}
             </ul>
-            <Link to="/pricing" className="block w-full text-center py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600">
-              Start Selling on VendorHub
+            <Link to="/pricing" className="block w-full text-center py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
+              Start Selling on Sumimaase
             </Link>
           </div>
         </motion.div>
@@ -174,7 +174,7 @@ const Marketplace = () => {
                 </li>
               ))}
             </ul>
-            <Link to="/pricing" className="block w-full text-center py-2 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600">
+            <Link to="/pricing" className="block w-full text-center py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
               Explore Global Marketplaces
             </Link>
           </div>
@@ -275,7 +275,7 @@ const Marketplace = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl overflow-hidden mb-8"
+        className="bg-gradient-to-r from-blue-800 to-indigo-900 rounded-xl overflow-hidden mb-8"
       >
         <div className="max-w-4xl mx-auto px-6 py-12 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to expand your business?</h2>
@@ -283,7 +283,7 @@ const Marketplace = () => {
             Join thousands of sellers who have grown their business by 3x in just 6 months
             with our marketplace integrations
           </p>
-          <Link to="/pricing" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-white/90">
+          <Link to="/pricing" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-medium hover:bg-blue-50">
             Get Started Now
           </Link>
         </div>

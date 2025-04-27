@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { 
   MenuIcon, 
   SearchIcon, 
@@ -13,6 +13,7 @@ import { useUser } from "../context/UserContext";
 
 const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
   const { user } = useUser();
+  const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showInbox, setShowInbox] = useState(false);
   
@@ -26,9 +27,21 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
     setShowInbox(!showInbox);
     if (showNotifications) setShowNotifications(false);
   };
+
+  // Handler for navigating to profile
+  const handleProfileClick = (e) => {
+    e.preventDefault();
+    navigate('/profile', { replace: true });
+  };
+
+  // Handler for navigating to home
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    navigate('/home', { replace: true });
+  };
   
   return (
-    <header className="bg-gradient-to-r from-gray-600 to-gray-700 shadow-md fixed top-0 left-0 right-0 z-50 h-16">
+    <header className="bg-gradient-to-r from-gray-800 to-gray-900 shadow-md fixed top-0 left-0 right-0 z-50 h-16">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
           {/* Left section */}
@@ -40,13 +53,17 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
             >
               <MenuIcon className="h-6 w-6" />
             </button>
-            <NavLink to="/home" className="flex items-center ml-1 md:ml-0">
+            <NavLink 
+              to="/home" 
+              className="flex items-center ml-1 md:ml-0"
+              onClick={handleHomeClick}
+            >
               <img 
-                src="https://ui-avatars.com/api/?name=V+H&background=random&color=fff"
-                className="h-8 w-8 rounded-md mr-1 sm:mr-2" 
-                alt="VendorHub"
+                src="https://ui-avatars.com/api/?name=S+M&background=random&color=fff"
+                className="h-8 w-8 rounded-md mr-1 sm:mr-2 bg-blue-500" 
+                alt="Sumimaase"
               />
-              <span className="text-white font-bold text-lg sm:text-xl">VendorHub</span>
+              <span className="text-white font-bold text-lg sm:text-xl">Sumimaase</span>
             </NavLink>
           </div>
           
@@ -59,7 +76,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
                 className="w-full py-2 pl-10 pr-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/30"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <SearchIcon className="h-5 w-5 text-white/70" />
+                <SearchIcon className="h-5 w-5 text-blue-500" />
               </div>
             </div>
           </div>
@@ -71,7 +88,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
               onClick={handleToggleNotifications}
               aria-label="Notifications"
             >
-              <BellIcon className="h-5 w-5" />
+              <BellIcon className="h-5 w-5 text-blue-500" />
               <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs flex items-center justify-center">3</span>
             </button>
             
@@ -80,7 +97,7 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
               onClick={handleToggleInbox}
               aria-label="Messages"
             >
-              <InboxIcon className="h-5 w-5" />
+              <InboxIcon className="h-5 w-5 text-blue-500" />
               <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs flex items-center justify-center">5</span>
             </button>
             
@@ -88,19 +105,22 @@ const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
               className="p-1 sm:p-2 rounded-full text-white hover:bg-white/10 flex items-center justify-center"
               onClick={() => alert("Shopping cart will be implemented in future updates!")}
             >
-              <ShoppingCartIcon className="h-5 w-5" />
+              <ShoppingCartIcon className="h-5 w-5 text-blue-500" />
             </button>
             
-            <NavLink to="/profile" className="flex items-center ml-1 sm:ml-0">
+            <div 
+              className="flex items-center ml-1 sm:ml-0 cursor-pointer"
+              onClick={handleProfileClick}
+            >
               <div className="flex items-center">
                 <img
-                  className="h-8 w-8 rounded-full border-2 border-white"
+                  className="h-8 w-8 rounded-full border-2 border-blue-500"
                   src={user.avatar}
                   alt="User avatar"
                 />
                 <span className="ml-2 text-white text-sm font-medium hidden md:block">{user.name}</span>
               </div>
-            </NavLink>
+            </div>
           </div>
         </div>
       </div>

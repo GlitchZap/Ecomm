@@ -2,9 +2,9 @@ import React, { createContext, useState, useContext } from 'react';
 
 // Initialize with the exact time you specified
 const initialUserState = {
-  name: "GlitchZap",
+  name: "Rohit Kumar",
   email: "glitchzap@mail.com",
-  avatar: "https://ui-avatars.com/api/?name=GlitchZap&background=random",
+  avatar: "https://ui-avatars.com/api/?name=Rohit+Kumar&background=random",
   role: "Seller",
   dateTime: "2025-04-27 19:36:17"
 };
