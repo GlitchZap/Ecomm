@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import { 
   TrendingUpIcon, 
@@ -12,13 +12,7 @@ import {
 import { useUser } from "../context/UserContext";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { user, updateDateTime } = useUser();
-  
-  // Update current time
-  React.useEffect(() => {
-    updateDateTime("2025-04-27 20:10:03");
-  }, [updateDateTime]);
+  const { user } = useUser();
   
   const upcomingSales = [
     {
@@ -70,11 +64,6 @@ const Home = () => {
       icon: <CashIcon className="h-5 w-5 text-yellow-500" />,
     },
   ];
-
-  // Navigation handler
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
   
   return (
     <div>
@@ -82,15 +71,8 @@ const Home = () => {
       <div className="mb-4">
         <div className="flex flex-col sm:flex-row justify-between sm:items-center">
           <h1 className="text-xl font-bold text-gray-800 mb-1 sm:mb-0">
-            Welcome back, {user.name}!
+            Welcome back, {user?.name || 'User'}!
           </h1>
-          <p className="text-sm text-gray-500">
-            Today is {new Date(user.dateTime).toLocaleDateString('en-US', { 
-              month: 'long', 
-              day: 'numeric', 
-              year: 'numeric' 
-            })}
-          </p>
         </div>
         <p className="text-sm text-gray-600 mt-1">
           Here's what's happening with your store today
@@ -133,23 +115,22 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl shadow-lg overflow-hidden text-white"
         >
-          <div className="p-4">
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="text-base font-bold">Sell on Global Marketplaces</h3>
-                <p className="mt-1 text-white/80 text-xs">
-                  Expand your reach by listing your products on Amazon, Flipkart, and more.
-                </p>
-                <button 
-                  onClick={(e) => handleNavigation('/marketplace')}
-                  className="mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-white/90"
-                >
-                  Explore Marketplaces
-                </button>
-              </div>
-              <div className="hidden md:block">
-                <GiftIcon className="h-16 w-16 text-white/20" />
-              </div>
+          <div className="p-4 flex flex-col md:flex-row md:items-center md:justify-between">
+            <div>
+              <h3 className="text-base font-bold">Sell on Global Marketplaces</h3>
+              <p className="mt-1 text-white/80 text-xs">
+                Expand your reach by listing your products on Amazon, Flipkart, and more.
+              </p>
+              <Link
+                to="/marketplace"
+                className="inline-block mt-2 bg-white text-gray-700 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-gray-100 transition"
+                aria-label="Explore Marketplaces"
+              >
+                Explore Marketplaces
+              </Link>
+            </div>
+            <div className="hidden md:block">
+              <GiftIcon className="h-16 w-16 text-white/20" />
             </div>
           </div>
         </motion.div>
@@ -159,9 +140,9 @@ const Home = () => {
       <div className="mb-4">
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-lg font-bold text-gray-800">Upcoming Sales Events</h2>
-          <button className="text-xs text-gray-600 hover:text-gray-800 flex items-center">
+          <Link to="/marketplace" className="text-xs text-gray-600 hover:text-gray-800 flex items-center">
             View All <ChevronRightIcon className="h-3 w-3 ml-1" />
-          </button>
+          </Link>
         </div>
         
         <div className="relative -mx-4">
@@ -188,9 +169,12 @@ const Home = () => {
                 </div>
                 <div className="p-3 bg-white">
                   <p className="text-gray-600 text-xs line-clamp-2 h-9">{sale.description}</p>
-                  <button className={`mt-2 w-full py-1.5 rounded-lg text-white text-xs font-medium bg-gradient-to-r ${sale.color}`}>
+                  <Link 
+                    to="/marketplace" 
+                    className={`mt-2 w-full py-1.5 rounded-lg text-white text-xs font-medium bg-gradient-to-r ${sale.color} block text-center`}
+                  >
                     Register Now
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -214,18 +198,18 @@ const Home = () => {
                   and multi-channel selling capabilities.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <button 
-                    onClick={(e) => handleNavigation('/pricing')}
-                    className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-white/90 shadow-md text-center text-sm"
+                  <Link
+                    to="/pricing"
+                    className="bg-white text-gray-700 px-3 py-1.5 rounded-lg font-medium hover:bg-gray-100 shadow-md text-center text-sm transition"
                   >
                     View Pricing Plans
-                  </button>
-                  <button 
-                    onClick={(e) => handleNavigation('/profile')}
-                    className="bg-transparent border border-white text-white px-3 py-1.5 rounded-lg font-medium hover:bg-white/10 text-center text-sm"
+                  </Link>
+                  <Link
+                    to="/profile"
+                    className="bg-transparent border border-white text-white px-3 py-1.5 rounded-lg font-medium hover:bg-white/10 text-center text-sm transition"
                   >
                     Learn More
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div className="hidden md:block">
@@ -262,9 +246,9 @@ const Home = () => {
               ))}
             </div>
             
-            <button className="mt-2 text-gray-600 text-xs font-medium hover:text-gray-800">
+            <Link to="/marketplace" className="mt-2 text-gray-600 text-xs font-medium hover:text-gray-800 block">
               View All Trends
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>
@@ -298,9 +282,9 @@ const Home = () => {
             ))}
           </div>
           
-          <button className="mt-2 text-gray-600 text-xs font-medium hover:text-gray-800">
+          <Link to="/dashboard" className="mt-2 text-gray-600 text-xs font-medium hover:text-gray-800 block">
             View All Activity
-          </button>
+          </Link>
         </div>
       </div>
       
@@ -311,38 +295,31 @@ const Home = () => {
         transition={{ delay: 0.3 }}
         className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
       >
-        <div className="p-4">
-          <div className="flex flex-col md:flex-row md:items-center">
-            <div className="mb-3 md:mb-0 md:mr-6 flex-1">
-              <h3 className="text-base font-bold text-gray-800 mb-1">Get Premium Access</h3>
-              <p className="text-gray-600 text-xs mb-2">
-                Unlock all features and grow your business with our premium plan. Get AI-powered insights, 
-                unlimited listings and priority support.
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {["AI Analytics", "Priority Support", "Unlimited Products"].map((feature, i) => (
-                  <span key={i} className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-[10px] font-medium">
-                    {feature}
-                  </span>
-                ))}
-              </div>
+        <div className="p-4 flex flex-col md:flex-row md:items-center md:justify-between">
+          <div className="mb-3 md:mb-0 md:mr-6 flex-1">
+            <h3 className="text-base font-bold text-gray-800 mb-1">Get Premium Access</h3>
+            <p className="text-gray-600 text-xs mb-2">
+              Unlock all features and grow your business with our premium plan. Get AI-powered insights, 
+              unlimited listings and priority support.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {["AI Analytics", "Priority Support", "Unlimited Products"].map((feature, i) => (
+                <span key={i} className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full text-[10px] font-medium">
+                  {feature}
+                </span>
+              ))}
             </div>
-            <div className="flex-shrink-0">
-              <button
-                onClick={(e) => handleNavigation('/pricing')}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm text-xs"
-              >
-                View Plans
-              </button>
-            </div>
+          </div>
+          <div className="flex-shrink-0">
+            <Link
+              to="/pricing"
+              className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm text-xs transition"
+            >
+              View Plans
+            </Link>
           </div>
         </div>
       </motion.div>
-      
-      {/* Footer timestamp */}
-      <div className="mt-4 text-[10px] text-center text-gray-400">
-        Last updated: {user.dateTime} • User: {user.name}
-      </div>
     </div>
   );
 };

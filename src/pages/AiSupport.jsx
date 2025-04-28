@@ -228,11 +228,6 @@ const AiSupport = () => {
           </div>
         </motion.div>
       </div>
-      
-      {/* Footer timestamp */}
-      <div className="mt-8 text-xs text-center text-gray-400">
-        Last updated: {user.dateTime} • User: {user.name}
-      </div>
     </div>
   );
 };

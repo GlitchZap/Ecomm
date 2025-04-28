@@ -309,11 +309,6 @@ const Pricing = () => {
           </p>
         </div>
       </motion.div>
-      
-      {/* Footer timestamp */}
-      <div className="mt-4 md:mt-6 text-[10px] md:text-xs text-center text-gray-400">
-        Last updated: {user.dateTime} • User: {user.name}
-      </div>
     </div>
   );
 };

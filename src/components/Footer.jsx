@@ -93,10 +93,6 @@ const Footer = ({ className = "" }) => {
             <a href="#" className="hover:text-white">Cookie Policy</a>
           </div>
         </div>
-        
-        <div className="mt-4 text-xs text-center text-gray-500">
-          Current Time: {user.dateTime} • User: {user.name}
-        </div>
       </div>
     </footer>
   );

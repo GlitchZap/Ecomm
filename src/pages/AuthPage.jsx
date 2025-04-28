@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   UserIcon, 
@@ -11,9 +11,10 @@ import {
   ShoppingBagIcon,
   ShieldCheckIcon
 } from "@heroicons/react/outline";
+import { useUser } from '../context/UserContext';
 
 const AuthPage = () => {
-  const [authMode, setAuthMode] = useState("login");
+  const [isLogin, setIsLogin] = useState(true);
   const [userType, setUserType] = useState("seller"); // "seller" or "admin"
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,21 +27,33 @@ const AuthPage = () => {
     sellerCategory: "",
     adminCode: ""
   });
+  const [error, setError] = useState('');
   
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useUser();
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, this would call an authentication API
-    console.log("Form submitted:", formData, "User Type:", userType);
-    
-    // Simulate login success - in a real app, this would check the credentials
-    if (userType === "admin") {
-      // Redirect to admin dashboard
-      navigate("/admin/dashboard");
-    } else {
-      // Redirect to seller dashboard
-      navigate("/home");
+    setError('');
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // For demo purposes, we'll consider any login successful
+      login({
+        name: formData.name || 'Demo User',
+        email: formData.email,
+        role: 'Seller',
+        avatar: `https://ui-avatars.com/api/?name=${(formData.name || 'Demo User').replace(/\s/g, '+')}&background=random`
+      });
+
+      // Redirect to the intended destination or home
+      const from = location.state?.from?.pathname || '/home';
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError('Invalid credentials. Please try again.');
     }
   };
   
@@ -131,14 +144,18 @@ const AuthPage = () => {
         {/* Auth form */}
         <div className="p-6">
           <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">
-            {authMode === "login" 
-              ? `${userType === "seller" ? "Seller" : "Admin"} Sign In` 
-              : `Register as a ${userType === "seller" ? "Seller" : "Admin"}`}
+            {isLogin ? `${userType === "seller" ? "Seller" : "Admin"} Sign In` : `Register as a ${userType === "seller" ? "Seller" : "Admin"}`}
           </h2>
+          
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
+              {error}
+            </div>
+          )}
           
           <form onSubmit={handleSubmit}>
             {/* Name field - only in register mode */}
-            {authMode === "register" && (
+            {!isLogin && userType === "seller" && (
               <div className="mb-4">
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                 <div className="relative">
@@ -160,7 +177,7 @@ const AuthPage = () => {
             )}
             
             {/* Business details - only for seller registration */}
-            {authMode === "register" && userType === "seller" && (
+            {!isLogin && userType === "seller" && (
               <>
                 <div className="mb-4">
                   <label htmlFor="businessName" className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
@@ -213,7 +230,7 @@ const AuthPage = () => {
             )}
             
             {/* Admin code - only for admin registration */}
-            {authMode === "register" && userType === "admin" && (
+            {!isLogin && userType === "admin" && (
               <div className="mb-4">
                 <label htmlFor="adminCode" className="block text-sm font-medium text-gray-700 mb-1">Admin Authorization Code</label>
                 <input
@@ -284,7 +301,7 @@ const AuthPage = () => {
             </div>
             
             {/* Confirm Password field - only in register mode */}
-            {authMode === "register" && (
+            {!isLogin && (
               <div className="mb-4">
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
                 <div className="relative">
@@ -306,7 +323,7 @@ const AuthPage = () => {
             )}
             
             {/* Remember me & Forgot password - only in login mode */}
-            {authMode === "login" && (
+            {isLogin && (
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
                   <input
@@ -326,7 +343,7 @@ const AuthPage = () => {
             )}
             
             {/* Terms & Conditions - only in register mode */}
-            {authMode === "register" && (
+            {!isLogin && (
               <div className="flex items-start mb-6">
                 <div className="flex items-center h-5 mt-1">
                   <input
@@ -359,21 +376,19 @@ const AuthPage = () => {
                   : "bg-gray-600 hover:bg-gray-700 text-white"
               }`}
             >
-              {authMode === "login" 
-                ? `Sign In as ${userType === "seller" ? "Seller" : "Admin"}` 
-                : `Register as ${userType === "seller" ? "Seller" : "Admin"}`}
+              {isLogin ? `Sign In as ${userType === "seller" ? "Seller" : "Admin"}` : `Register as ${userType === "seller" ? "Seller" : "Admin"}`}
             </button>
             
             {/* Switch mode */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                {authMode === "login" ? "Don't have an account? " : "Already have an account? "}
+                {isLogin ? "Don't have an account? " : "Already have an account? "}
                 <button
                   type="button"
                   className="font-medium text-gray-600 hover:text-gray-800"
-                  onClick={() => setAuthMode(authMode === "login" ? "register" : "login")}
+                  onClick={() => setIsLogin(!isLogin)}
                 >
-                  {authMode === "login" ? "Sign up" : "Sign in"}
+                  {isLogin ? "Sign up" : "Sign in"}
                 </button>
               </p>
             </div>
