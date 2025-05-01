@@ -9,6 +9,7 @@ import AiSupport from "./pages/AiSupport";
 import Profile from "./pages/Profile";
 import Pricing from "./pages/Pricing";
 import Layout from "./components/Layout";
+import LandingPage from "./components/LandingPage";
 
 // Protected Route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -39,11 +40,13 @@ const PublicRoute = ({ children }) => {
 function AppRoutes() {
   return (
     <Routes>
-      {/* Root path redirects to auth if not authenticated, or home if authenticated */}
+      {/* Root path shows landing page */}
       <Route 
         path="/" 
         element={
-          <Navigate to="/auth" replace />
+          <PublicRoute>
+            <LandingPage />
+          </PublicRoute>
         } 
       />
 
@@ -73,13 +76,8 @@ function AppRoutes() {
         <Route path="/pricing" element={<Pricing />} />
       </Route>
 
-      {/* Catch all route - redirects to auth if not authenticated, or home if authenticated */}
-      <Route 
-        path="*" 
-        element={
-          <Navigate to="/auth" replace />
-        } 
-      />
+      {/* Catch all route - redirects to landing page */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
