@@ -11,7 +11,11 @@ import {
   InformationCircleIcon,
   SparklesIcon,
   LightningBoltIcon,
-  GlobeAltIcon
+  GlobeAltIcon,
+  QrcodeIcon,
+  XIcon,
+  ArrowsExpandIcon,
+  ChevronUpIcon
 } from '@heroicons/react/outline';
 import LandingPageNavbar from './LandingPageNavbar';
 import LandingPageFooter from './LandingPageFooter';
@@ -28,6 +32,10 @@ const GradientText = ({ children, className = "" }) => {
 const LandingPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [showQrPopup, setShowQrPopup] = useState(true); // Always show in minimized or expanded state
+  const [isQrExpanded, setIsQrExpanded] = useState(false);
+  const [qrPosition, setQrPosition] = useState({ x: 0, y: 0 });
+  const popupRef = useRef(null);
   
   const marketplaceRef = useRef(null);
   const pricingRef = useRef(null);
@@ -77,6 +85,29 @@ const LandingPage = () => {
     }
     return () => clearInterval(interval);
   }, [isAutoPlaying, slides.length]);
+
+  // Show QR popup after a small delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowQrPopup(true);
+    }, 3000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Drag functionality for the QR popup
+  const onDragEnd = (event, info) => {
+    const newPosition = { 
+      x: qrPosition.x + info.offset.x, 
+      y: qrPosition.y + info.offset.y 
+    };
+    setQrPosition(newPosition);
+  };
+
+  // Toggle QR popup expansion
+  const toggleQrExpanded = () => {
+    setIsQrExpanded(!isQrExpanded);
+  };
 
   const scrollToSection = (ref) => {
     if (ref && ref.current) {
@@ -699,44 +730,156 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How It Works Section - Enhanced */}
       <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white opacity-70"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              How It <GradientText>Works</GradientText>
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600">Simple steps to get started with Sumimaase</p>
+          <div className="text-center mb-12 sm:mb-20">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-center mb-4"
+            >
+              <LightningBoltIcon className="h-10 w-10 text-gray-700 mr-3" />
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+                How It <GradientText>Works</GradientText>
+              </h2>
+            </motion.div>
+            <p className="text-xl text-gray-600 mb-4">Your journey from signup to success with Sumimaase</p>
+            <div className="max-w-3xl mx-auto">
+              <p className="text-gray-600">Our streamlined process makes it easy to start selling across multiple platforms with minimal setup time.</p>
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-10 sm:gap-8">
+          {/* Process Steps - Desktop View */}
+          <div className="hidden md:block relative mb-20">
+            {/* Connection Line */}
+            <div className="absolute top-36 left-0 w-full h-1 bg-gradient-to-r from-gray-300 via-gray-400 to-gray-300"></div>
+
+            <div className="grid grid-cols-4 gap-6">
+              {[
+                {
+                  step: 1,
+                  title: "Create Your Account",
+                  description: "Sign up and set up your seller profile in minutes with our guided onboarding",
+                  icon: <UserGroupIcon className="w-8 h-8 text-white" />,
+                  features: ["Simple verification process", "Secure authentication", "Custom profile setup"],
+                  image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                  delay: 0.1
+                },
+                {
+                  step: 2,
+                  title: "Connect Your Platforms",
+                  description: "Easily integrate your existing marketplace accounts or create new ones",
+                  icon: <GlobeAltIcon className="w-8 h-8 text-white" />,
+                  features: ["One-click integrations", "Multi-marketplace support", "Real-time synchronization"],
+                  image: "https://images.unsplash.com/photo-1572025442646-866d16c84a54?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                  delay: 0.2
+                },
+                {
+                  step: 3,
+                  title: "List Your Products",
+                  description: "Upload your products once and publish to multiple platforms automatically",
+                  icon: <CubeIcon className="w-8 h-8 text-white" />,
+                  features: ["Bulk upload tools", "AI-powered descriptions", "Auto-categorization"],
+                  image: "https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                  delay: 0.3
+                },
+                {
+                  step: 4,
+                  title: "Manage & Scale",
+                  description: "Track orders, manage inventory, and grow your business from one dashboard",
+                  icon: <ChartBarIcon className="w-8 h-8 text-white" />,
+                  features: ["Unified order management", "Analytics dashboard", "Automated inventory updates"],
+                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                  delay: 0.4
+                }
+              ].map((item) => (
+                <motion.div 
+                  key={item.step}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: item.delay }}
+                  className="flex flex-col items-center text-center relative"
+                >
+                  {/* Number Badge with Circle */}
+                  <motion.div
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: item.delay + 0.3 }}
+                    className="w-20 h-20 rounded-full bg-white border-4 border-gray-700 flex items-center justify-center mb-8 relative z-10"
+                  >
+                    <span className="text-2xl font-bold text-gray-800">{item.step}</span>
+                  </motion.div>
+                  
+                  {/* Icon Box */}
+                  <motion.div
+                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                    className="w-20 h-20 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center mb-6"
+                  >
+                    {item.icon}
+                  </motion.div>
+                  
+                  <h3 className="text-xl font-semibold mb-3 text-gray-800">{item.title}</h3>
+                  <p className="text-gray-600 mb-5">{item.description}</p>
+                  
+                  {/* Feature List */}
+                  <ul className="space-y-2 text-sm text-left w-full">
+                    {item.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <svg className="h-5 w-5 text-gray-700 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Process Steps - Mobile View */}
+          <div className="md:hidden space-y-12">
             {[
               {
                 step: 1,
-                title: "Sign Up",
-                description: "Create your account in minutes",
-                icon: <UserGroupIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+                title: "Create Your Account",
+                description: "Sign up and set up your seller profile in minutes with our guided onboarding",
+                icon: <UserGroupIcon className="w-6 h-6 text-white" />,
+                features: ["Simple verification process", "Secure authentication", "Custom profile setup"],
+                image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 delay: 0.1
               },
               {
                 step: 2,
-                title: "Connect Platforms",
-                description: "Link your e-commerce accounts",
-                icon: <GlobeAltIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+                title: "Connect Your Platforms",
+                description: "Easily integrate your existing marketplace accounts or create new ones",
+                icon: <GlobeAltIcon className="w-6 h-6 text-white" />,
+                features: ["One-click integrations", "Multi-marketplace support", "Real-time synchronization"],
+                image: "https://images.unsplash.com/photo-1572025442646-866d16c84a54?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 delay: 0.2
               },
               {
                 step: 3,
-                title: "Upload Products",
-                description: "Add your products to multiple platforms",
-                icon: <CubeIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+                title: "List Your Products",
+                description: "Upload your products once and publish to multiple platforms automatically",
+                icon: <CubeIcon className="w-6 h-6 text-white" />,
+                features: ["Bulk upload tools", "AI-powered descriptions", "Auto-categorization"],
+                image: "https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 delay: 0.3
               },
               {
                 step: 4,
-                title: "Start Selling",
-                description: "Manage everything from one place",
-                icon: <LightningBoltIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+                title: "Manage & Scale",
+                description: "Track orders, manage inventory, and grow your business from one dashboard",
+                icon: <ChartBarIcon className="w-6 h-6 text-white" />,
+                features: ["Unified order management", "Analytics dashboard", "Automated inventory updates"],
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 delay: 0.4
               }
             ].map((item) => (
@@ -745,37 +888,71 @@ const LandingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: item.delay }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 className="flex flex-col items-center text-center relative"
               >
-                <div className="relative mb-6">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
+                <div className="flex items-center mb-5">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 border-2 border-gray-700 flex items-center justify-center mr-4">
+                    <span className="text-lg font-bold text-gray-800">{item.step}</span>
+                  </div>
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
                     {item.icon}
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-100 rounded-full border-2 border-gray-700 flex items-center justify-center text-sm font-bold text-gray-800">
-                    {item.step}
-                  </div>
-                  
-                  {/* Horizontal connector for tablets and larger screens */}
-                  {item.step < 4 && (
-                    <div className="hidden sm:block absolute top-1/2 left-full w-full h-0.5 bg-gray-300 -translate-y-1/2 -translate-x-4 z-0">
-                      <div className="absolute right-0 w-2 h-2 rounded-full bg-gray-700 -top-0.5"></div>
-                    </div>
-                  )}
-                  
-                  {/* Vertical connector for mobile */}
-                  {item.step < 4 && (
-                    <div className="sm:hidden absolute -bottom-12 left-1/2 h-8 w-0.5 bg-gray-300 transform -translate-x-1/2">
-                      <div className="absolute bottom-0 h-2 w-2 rounded-full bg-gray-700 -left-0.75"></div>
-                    </div>
-                  )}
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-800">{item.title}</h3>
-                <p className="text-sm sm:text-base text-gray-600">{item.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-800">{item.title}</h3>
+                <p className="text-gray-600 mb-4">{item.description}</p>
+                
+                {/* Feature List */}
+                <ul className="space-y-2 text-sm text-left w-full">
+                  {item.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <svg className="h-5 w-5 text-gray-700 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                {/* Connector Line */}
+                {item.step < 4 && (
+                  <div className="h-10 w-px bg-gray-300 my-5"></div>
+                )}
               </motion.div>
             ))}
           </div>
+          
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mt-16 sm:mt-24 text-center"
+          >
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-3xl p-8 sm:p-10 shadow-lg border border-gray-200 max-w-3xl mx-auto">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to transform your business?</h3>
+              <p className="text-gray-600 mb-6">Join thousands of sellers who have already streamlined their multi-platform selling with Sumimaase.</p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Link
+                  to="/auth"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium py-3 px-6 rounded-xl hover:shadow-lg transition duration-300"
+                >
+                  Get Started Now
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link
+                  to="/pricing"
+                  className="inline-flex items-center justify-center border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-xl hover:bg-gray-50 transition duration-300"
+                >
+                  View Plans
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -885,6 +1062,83 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* QR Code Popup - Minimizable & Expandable */}
+      <AnimatePresence>
+        {showQrPopup && (
+          <motion.div
+            ref={popupRef}
+            drag
+            dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
+            dragElastic={0.1}
+            dragMomentum={false}
+            onDragEnd={onDragEnd}
+            initial={{ opacity: 0, y: 100, scale: 0.8 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              x: qrPosition.x,
+              y: qrPosition.y
+            }}
+            exit={{ opacity: 0, y: 100, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            className={`fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 cursor-move ${
+              isQrExpanded ? 'w-80 sm:w-96' : 'w-auto'
+            }`}
+          >
+            {isQrExpanded ? (
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden w-full">
+                <div className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 p-4 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <QrcodeIcon className="h-5 w-5 text-white mr-2" />
+                    <h3 className="text-white font-semibold text-sm">Get Sumimaase Mobile</h3>
+                  </div>
+                  <div className="flex items-center">
+                    <button 
+                      onClick={toggleQrExpanded}
+                      className="text-white hover:text-gray-200 transition-colors"
+                      title="Minimize"
+                    >
+                      <ChevronUpIcon className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="p-4 bg-gradient-to-br from-white to-gray-50">
+                  <div className="bg-white p-2 rounded-lg shadow-inner border border-gray-100 mx-auto w-60 h-60 flex items-center justify-center mb-3">
+                    <img 
+                      src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://sumimaase.com/app" 
+                      alt="QR Code for Sumimaase mobile app"
+                      className="max-w-full max-h-full"
+                    />
+                  </div>
+                  <p className="text-gray-700 text-sm text-center font-medium">Scan to download our mobile app</p>
+                  <div className="mt-3 text-center">
+                    <button 
+                      className="inline-flex items-center justify-center bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white text-sm font-medium py-2 px-4 rounded-lg transition-all duration-300 w-full"
+                    >
+                      Get App Now
+                    </button>
+                  </div>
+                  <div className="mt-2 text-center">
+                    <p className="text-xs text-gray-500 italic">
+                      Drag this box to move it • Click the arrow to minimize
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={toggleQrExpanded}
+                className="flex items-center justify-center p-4 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                title="Get Mobile App"
+              >
+                <QrcodeIcon className="h-6 w-6" />
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <LandingPageFooter />
     </div>
