@@ -103,7 +103,7 @@ const LandingPage = () => {
       />
       
       {/* Hero Section - Aceternity UI Inspired */}
-      <section className="relative h-[700px] overflow-hidden bg-gray-50">
+      <section className="relative h-[700px] md:h-[700px] overflow-hidden bg-gray-50">
         {/* Animated Background Elements - Inspired by Aceternity UI */}
         <div className="absolute inset-0 w-full h-full bg-grid-gray-200/25 bg-center [mask-image:linear-gradient(to_bottom,transparent,black)]" />
         <div className="absolute inset-0 w-full h-full">
@@ -134,7 +134,7 @@ const LandingPage = () => {
           </motion.div>
         </AnimatePresence>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center pt-16 md:pt-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -154,7 +154,7 @@ const LandingPage = () => {
               </motion.div>
               
               <motion.h1 
-                className="mt-6 text-5xl sm:text-6xl font-bold tracking-tight mb-4"
+                className="mt-6 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -166,7 +166,7 @@ const LandingPage = () => {
               </motion.h1>
               
               <motion.h2 
-                className="text-xl sm:text-2xl font-semibold mb-6 text-gray-100"
+                className="text-lg sm:text-xl md:text-2xl font-semibold mb-6 text-gray-100"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
@@ -175,7 +175,7 @@ const LandingPage = () => {
               </motion.h2>
               
               <motion.p 
-                className="text-lg mb-8 text-gray-200"
+                className="text-base md:text-lg mb-8 text-gray-200"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.9 }}
@@ -191,7 +191,7 @@ const LandingPage = () => {
               >
                 <Link
                   to={slides[currentSlide].type === "seller" ? "/register" : "/marketplace"}
-                  className="inline-flex items-center justify-center bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   {slides[currentSlide].cta}
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,7 +200,7 @@ const LandingPage = () => {
                 </Link>
                 <button
                   onClick={() => scrollToSection(marketplaceRef)} 
-                  className="inline-flex items-center justify-center bg-transparent border border-gray-300 text-white font-semibold py-4 px-8 rounded-xl hover:bg-white/10 transition-all duration-300"
+                  className="inline-flex items-center justify-center bg-transparent border border-gray-300 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl hover:bg-white/10 transition-all duration-300"
                 >
                   Learn More
                 </button>
@@ -242,29 +242,29 @@ const LandingPage = () => {
                       setIsAutoPlaying(false);
                     }}
                     className={`h-2 rounded-full transition-all duration-300 ${
-                      currentSlide === index ? 'w-10 bg-white' : 'w-6 bg-gray-400'
+                      currentSlide === index ? 'w-8 sm:w-10 bg-white' : 'w-4 sm:w-6 bg-gray-400'
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
               </div>
               
-              <div className="flex space-x-4">
+              <div className="flex space-x-2 sm:space-x-4">
                 <button
                   onClick={prevSlide}
-                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white transition-colors"
+                  className="p-1.5 sm:p-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white transition-colors"
                   aria-label="Previous slide"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white transition-colors"
+                  className="p-1.5 sm:p-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white transition-colors"
                   aria-label="Next slide"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
@@ -275,29 +275,29 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-1/2 bg-gray-50"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               Why Choose <GradientText>Sumimaase</GradientText>?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Empowering small-town sellers with powerful tools and global reach</p>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Empowering small-town sellers with powerful tools and global reach</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 relative z-10"
+              className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 relative z-10"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-6">
-                <ChartBarIcon className="w-8 h-8 text-white" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-6">
+                <ChartBarIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">Multi-Platform Integration</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Multi-Platform Integration</h3>
               <p className="text-gray-600">Manage your inventory and sales across multiple e-commerce platforms from a single dashboard.</p>
             </motion.div>
             
@@ -307,12 +307,12 @@ const LandingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 relative z-10"
+              className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 relative z-10"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-6">
-                <UserGroupIcon className="w-8 h-8 text-white" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-6">
+                <UserGroupIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">Verified Seller Network</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">Verified Seller Network</h3>
               <p className="text-gray-600">Connect with trusted buyers and expand your customer base with our verified seller network.</p>
             </motion.div>
             
@@ -322,12 +322,12 @@ const LandingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 relative z-10"
+              className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 relative z-10"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-6">
-                <ChatAlt2Icon className="w-8 h-8 text-white" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-6">
+                <ChatAlt2Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">AI-Powered Support</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">AI-Powered Support</h3>
               <p className="text-gray-600">Get instant assistance and insights with our AI-powered support system.</p>
             </motion.div>
           </div>
@@ -335,10 +335,10 @@ const LandingPage = () => {
       </section>
 
       {/* Marketplace Section */}
-      <section ref={marketplaceRef} id="marketplace" className="py-24 bg-gray-50 relative overflow-hidden">
+      <section ref={marketplaceRef} id="marketplace" className="py-16 sm:py-24 bg-gray-50 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-100 via-gray-50 to-white opacity-80"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -346,15 +346,15 @@ const LandingPage = () => {
               transition={{ duration: 0.5 }}
               className="flex items-center justify-center mb-4"
             >
-              <CubeIcon className="h-10 w-10 text-gray-700 mr-3" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+              <CubeIcon className="h-8 w-8 sm:h-10 sm:w-10 text-gray-700 mr-3" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
                 <GradientText>Marketplace</GradientText>
               </h2>
             </motion.div>
-            <p className="text-xl text-gray-600">Discover a wide range of unique products from verified sellers</p>
+            <p className="text-lg sm:text-xl text-gray-600">Discover a wide range of unique products from verified sellers</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -363,7 +363,7 @@ const LandingPage = () => {
               whileHover={{ y: -8 }}
               className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group"
             >
-              <div className="h-60 bg-gray-200 relative overflow-hidden">
+              <div className="h-48 sm:h-60 bg-gray-200 relative overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
                   alt="Handcrafted Products" 
@@ -371,15 +371,15 @@ const LandingPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <div className="p-8">
-                <h3 className="font-semibold text-xl text-gray-800 mb-3">Handcrafted Goods</h3>
-                <p className="text-gray-600 mb-5">Unique handmade products from local artisans across rural India.</p>
+              <div className="p-6 sm:p-8">
+                <h3 className="font-semibold text-lg sm:text-xl text-gray-800 mb-2 sm:mb-3">Handcrafted Goods</h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-5">Unique handmade products from local artisans across rural India.</p>
                 <button 
                   onClick={() => scrollToSection(marketplaceRef)} 
                   className="inline-flex items-center text-gray-700 font-medium hover:text-gray-900 transition-colors"
                 >
                   Explore Collection 
-                  <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>
@@ -394,7 +394,7 @@ const LandingPage = () => {
               whileHover={{ y: -8 }}
               className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group"
             >
-              <div className="h-60 bg-gray-200 relative overflow-hidden">
+              <div className="h-48 sm:h-60 bg-gray-200 relative overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1571204829887-3b8d69e763ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
                   alt="Traditional Food" 
@@ -402,15 +402,15 @@ const LandingPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <div className="p-8">
-                <h3 className="font-semibold text-xl text-gray-800 mb-3">Traditional Foods</h3>
-                <p className="text-gray-600 mb-5">Authentic regional cuisines and foods prepared with traditional recipes.</p>
+              <div className="p-6 sm:p-8">
+                <h3 className="font-semibold text-lg sm:text-xl text-gray-800 mb-2 sm:mb-3">Traditional Foods</h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-5">Authentic regional cuisines and foods prepared with traditional recipes.</p>
                 <button 
                   onClick={() => scrollToSection(marketplaceRef)} 
                   className="inline-flex items-center text-gray-700 font-medium hover:text-gray-900 transition-colors"
                 >
                   Explore Collection 
-                  <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>
@@ -425,7 +425,7 @@ const LandingPage = () => {
               whileHover={{ y: -8 }}
               className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 group"
             >
-              <div className="h-60 bg-gray-200 relative overflow-hidden">
+              <div className="h-48 sm:h-60 bg-gray-200 relative overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
                   alt="Home Decor" 
@@ -433,15 +433,15 @@ const LandingPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-              <div className="p-8">
-                <h3 className="font-semibold text-xl text-gray-800 mb-3">Home Decor</h3>
-                <p className="text-gray-600 mb-5">Beautiful home decorations crafted by skilled artisans from small towns.</p>
+              <div className="p-6 sm:p-8">
+                <h3 className="font-semibold text-lg sm:text-xl text-gray-800 mb-2 sm:mb-3">Home Decor</h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-5">Beautiful home decorations crafted by skilled artisans from small towns.</p>
                 <button 
                   onClick={() => scrollToSection(marketplaceRef)} 
                   className="inline-flex items-center text-gray-700 font-medium hover:text-gray-900 transition-colors"
                 >
                   Explore Collection 
-                  <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>
@@ -449,7 +449,7 @@ const LandingPage = () => {
             </motion.div>
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-12 sm:mt-16 text-center">
             <motion.button 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -457,7 +457,7 @@ const LandingPage = () => {
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
               onClick={() => scrollToSection(marketplaceRef)}
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-xl hover:from-gray-800 hover:to-gray-900 shadow-lg hover:shadow-xl transition duration-300 transform"
+              className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-xl hover:from-gray-800 hover:to-gray-900 shadow-lg hover:shadow-xl transition duration-300 transform"
             >
               <ShoppingBagIcon className="w-5 h-5 mr-2" />
               View All Products
@@ -700,43 +700,43 @@ const LandingPage = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               How It <GradientText>Works</GradientText>
             </h2>
-            <p className="text-xl text-gray-600">Simple steps to get started with Sumimaase</p>
+            <p className="text-lg sm:text-xl text-gray-600">Simple steps to get started with Sumimaase</p>
           </div>
           
-          <div className="flex flex-col md:flex-row items-start justify-center gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-10 sm:gap-8">
             {[
               {
                 step: 1,
                 title: "Sign Up",
                 description: "Create your account in minutes",
-                icon: <UserGroupIcon className="w-8 h-8 text-white" />,
+                icon: <UserGroupIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
                 delay: 0.1
               },
               {
                 step: 2,
                 title: "Connect Platforms",
                 description: "Link your e-commerce accounts",
-                icon: <GlobeAltIcon className="w-8 h-8 text-white" />,
+                icon: <GlobeAltIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
                 delay: 0.2
               },
               {
                 step: 3,
                 title: "Upload Products",
                 description: "Add your products to multiple platforms",
-                icon: <CubeIcon className="w-8 h-8 text-white" />,
+                icon: <CubeIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
                 delay: 0.3
               },
               {
                 step: 4,
                 title: "Start Selling",
                 description: "Manage everything from one place",
-                icon: <LightningBoltIcon className="w-8 h-8 text-white" />,
+                icon: <LightningBoltIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
                 delay: 0.4
               }
             ].map((item) => (
@@ -746,20 +746,33 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: item.delay }}
-                className="flex-1 text-center"
+                className="flex flex-col items-center text-center relative"
               >
-                <div className="relative">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-6">
+                <div className="relative mb-6">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
                     {item.icon}
                   </div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-100 rounded-full border-2 border-gray-700 flex items-center justify-center text-sm font-bold text-gray-800">
+                    {item.step}
+                  </div>
+                  
+                  {/* Horizontal connector for tablets and larger screens */}
                   {item.step < 4 && (
-                    <div className="absolute top-10 left-full w-16 h-0.5 bg-gray-300 hidden md:block -translate-x-4">
+                    <div className="hidden sm:block absolute top-1/2 left-full w-full h-0.5 bg-gray-300 -translate-y-1/2 -translate-x-4 z-0">
                       <div className="absolute right-0 w-2 h-2 rounded-full bg-gray-700 -top-0.5"></div>
                     </div>
                   )}
+                  
+                  {/* Vertical connector for mobile */}
+                  {item.step < 4 && (
+                    <div className="sm:hidden absolute -bottom-12 left-1/2 h-8 w-0.5 bg-gray-300 transform -translate-x-1/2">
+                      <div className="absolute bottom-0 h-2 w-2 rounded-full bg-gray-700 -left-0.75"></div>
+                    </div>
+                  )}
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-gray-800">{item.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">{item.description}</p>
               </motion.div>
             ))}
           </div>

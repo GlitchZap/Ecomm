@@ -147,7 +147,7 @@ const AuthPage = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
       {/* Left Panel - Platform Information */}
-      <div className="w-full md:w-1/2 bg-gradient-to-br from-gray-700 to-gray-900 p-8 md:p-12 relative overflow-hidden">
+      <div className="w-full md:w-1/2 lg:w-5/12 bg-gradient-to-br from-gray-700 to-gray-900 p-8 md:p-12 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-40 left-40 w-80 h-80 bg-white rounded-full mix-blend-overlay filter blur-3xl"></div>
@@ -316,7 +316,7 @@ const AuthPage = () => {
       </div>
       
       {/* Right Panel - Login Form */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-12 relative">
+      <div className="w-full md:w-1/2 lg:w-7/12 flex flex-col justify-center px-4 sm:px-6 lg:flex-row lg:justify-center lg:items-center py-12 relative">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden -z-10">
           <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
@@ -324,7 +324,7 @@ const AuthPage = () => {
           <div className="absolute top-1/4 left-1/3 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
         </div>
         
-        <div className="max-w-md w-full mx-auto">
+        <div className="max-w-md w-full mx-auto lg:max-w-lg">
           {/* Logo - only visible on mobile */}
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
@@ -347,7 +347,7 @@ const AuthPage = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-center mb-8"
+            className="text-center mb-6"
           >
             <h1 className="text-3xl font-bold text-gray-800 mb-2">
               {isLogin ? "Welcome back" : "Join our community"}
@@ -393,6 +393,51 @@ const AuthPage = () => {
               }
               {isLogin ? `${userType === "seller" ? "Seller" : userType === "admin" ? "Admin" : "Customer"} Sign In` : `Register as a ${userType === "seller" ? "Seller" : userType === "admin" ? "Admin" : "Customer"}`}
             </h2>
+            
+            {/* Login Options - Only in login mode */}
+            {isLogin && (
+              <div className="mb-6 bg-gray-50 rounded-xl p-4">
+                <p className="text-gray-700 text-sm mb-3 font-medium">Login as:</p>
+                <div className="grid grid-cols-1 gap-3">
+                  <button 
+                    type="button"
+                    onClick={switchToCustomer}
+                    className={`w-full px-4 py-3 rounded-lg flex items-center justify-center text-sm transition-colors ${
+                      userType === "customer" 
+                        ? "bg-gray-800 text-white font-medium" 
+                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <UserGroupIcon className="h-5 w-5 mr-2" />
+                    Login as a Customer
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={switchToSeller}
+                    className={`w-full px-4 py-3 rounded-lg flex items-center justify-center text-sm transition-colors ${
+                      userType === "seller" 
+                        ? "bg-gray-800 text-white font-medium" 
+                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <ShoppingBagIcon className="h-5 w-5 mr-2" />
+                    Login as a Seller
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={switchToAdmin}
+                    className={`w-full px-4 py-3 rounded-lg flex items-center justify-center text-sm transition-colors ${
+                      userType === "admin" 
+                        ? "bg-gray-800 text-white font-medium" 
+                        : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <ShieldCheckIcon className="h-5 w-5 mr-2" />
+                    Login as an Admin
+                  </button>
+                </div>
+              </div>
+            )}
             
             <AnimatePresence mode="wait">
               <motion.div
@@ -786,42 +831,6 @@ const AuthPage = () => {
                 </button>
               </p>
             </div>
-            
-            {/* Social login */}
-            {isLogin && (
-              <>
-                {/* Divider */}
-                <div className="mt-6 relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300"></div>
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">Or continue with</span>
-                  </div>
-                </div>
-                
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                  <button 
-                    type="button" 
-                    className="w-full flex items-center justify-center py-2.5 px-4 rounded-lg border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/>
-                    </svg>
-                    Google
-                  </button>
-                  <button 
-                    type="button" 
-                    className="w-full flex items-center justify-center py-2.5 px-4 rounded-lg border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0014.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"/>
-                    </svg>
-                    Facebook
-                  </button>
-                </div>
-              </>
-            )}
           </motion.form>
           
           {/* Footer */}
