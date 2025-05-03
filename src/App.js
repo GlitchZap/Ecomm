@@ -27,6 +27,12 @@ const ProtectedRoute = ({ children }) => {
 const PublicRoute = ({ children }) => {
   const { user } = useUser();
   const location = useLocation();
+  const path = location.pathname;
+
+  // Always allow access to the landing page and auth page
+  if (path === "/auth") {
+    return children;
+  }
 
   if (user?.isAuthenticated) {
     // If user is authenticated, redirect to home or the last visited page
@@ -40,14 +46,10 @@ const PublicRoute = ({ children }) => {
 function AppRoutes() {
   return (
     <Routes>
-      {/* Root path shows landing page */}
+      {/* Root path shows landing page - always visible to everyone */}
       <Route 
         path="/" 
-        element={
-          <PublicRoute>
-            <LandingPage />
-          </PublicRoute>
-        } 
+        element={<LandingPage />} 
       />
 
       {/* Auth route - only accessible when not authenticated */}

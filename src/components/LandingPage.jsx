@@ -190,7 +190,7 @@ const LandingPage = () => {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <Link
-                  to={slides[currentSlide].type === "seller" ? "/register" : "/marketplace"}
+                  to="/auth"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   {slides[currentSlide].cta}
@@ -479,7 +479,7 @@ const LandingPage = () => {
             >
               <CurrencyDollarIcon className="h-10 w-10 text-gray-700 mr-3" />
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
-                Pricing <GradientText>Plans</GradientText>
+                Our <GradientText>Plans</GradientText>
               </h2>
             </motion.div>
             <p className="text-xl text-gray-600">Choose the perfect plan for your business needs</p>
@@ -853,7 +853,7 @@ const LandingPage = () => {
                   <p className="text-gray-600 mb-8">Join our platform and reach millions of customers</p>
                 </div>
                 <Link
-                  to="/register"
+                  to="/auth"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   Get Started
