@@ -966,10 +966,10 @@ const LandingPage = () => {
           {/* Marketplace Platforms */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-20">
             {[
-              { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", color: "from-yellow-400 to-yellow-500" },
-              { name: "Flipkart", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Flipkart_logo.svg", color: "from-blue-400 to-blue-500" },
-              { name: "Meesho", logo: "https://static.meeshosupply.com/supplier-growth/fashion-meesho-logo-2019.png", color: "from-pink-400 to-pink-500" },
-              { name: "Myntra", logo: "https://upload.wikimedia.org/wikipedia/commons/d/db/Myntra_logo.png", color: "from-red-400 to-red-500" },
+              { name: "Amazon", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIFYXy2EhtsgvdqD316wQ0Q8Q63efvYVM7ZBpPjaN0ovdVsRd4zzHRONqb1GvIDKTrrc&usqp=CAU", color: "from-yellow-400 to-yellow-500" },
+              { name: "Flipkart", logo: "https://1000logos.net/wp-content/uploads/2021/02/Flipkart-logo.png", color: "from-blue-400 to-blue-500" },
+              { name: "Meesho", logo: "https://cdn.iconscout.com/icon/free/png-256/free-meesho-icon-download-in-svg-png-gif-file-formats--company-logo-industry-brand-pack-logos-icons-10673438.png", color: "from-pink-400 to-pink-500" },
+              { name: "Myntra", logo: "https://logos-world.net/wp-content/uploads/2022/12/Myntra-Logo.png", color: "from-red-400 to-red-500" },
               { name: "Shopify", logo: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Shopify_logo_2018.svg", color: "from-green-400 to-green-500" },
             ].map((platform, index) => (
               <MotionWrapper key={index} delayOrder={index}>
