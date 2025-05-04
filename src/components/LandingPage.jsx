@@ -1350,7 +1350,7 @@ const LandingPage = () => {
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
                   <p className="text-gray-600">
-                    Sumimaase was founded in 2022 with a simple vision: to make e-commerce accessible to every business in India, regardless of its size or technical expertise.
+                    Sumimaase was founded in 2025 with a simple vision: to make e-commerce accessible to every business in India, regardless of its size or technical expertise.
                   </p>
                 </div>
 
