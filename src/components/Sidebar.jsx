@@ -14,7 +14,8 @@ import {
   MoonIcon,
   CurrencyRupeeIcon,
   MenuIcon,
-  XIcon
+  XIcon,
+  UserGroupIcon
 } from '@heroicons/react/outline';
 import { useUser } from '../context/UserContext';
 
@@ -27,7 +28,8 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
     navigate('/auth', { replace: true });
   };
 
-  const menuItems = [
+  // Define menu items for each user role
+  const sellerMenuItems = [
     { name: 'Home', icon: <HomeIcon className="h-5 w-5" />, path: '/home' },
     { name: 'Marketplace', icon: <ShoppingBagIcon className="h-5 w-5" />, path: '/marketplace' },
     { name: 'Dashboard', icon: <ChartBarIcon className="h-5 w-5" />, path: '/dashboard' },
@@ -35,6 +37,24 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
     { name: 'Pricing Plans', icon: <CurrencyRupeeIcon className="h-5 w-5" />, path: '/pricing' },
     { name: 'Profile', icon: <UserIcon className="h-5 w-5" />, path: '/profile' },
   ];
+
+  // Customer menu items will be defined later
+  const customerMenuItems = [
+    // Will be defined later as per the requirement
+  ];
+
+  // Determine which menu items to show based on user role
+  let menuItems = [];
+  
+  if (user?.role === 'Administrator') {
+    // For admin user, we'll show a message that admin dashboard is under construction
+    menuItems = [];
+  } else if (user?.role === 'Customer') {
+    menuItems = customerMenuItems;
+  } else {
+    // Default to seller menu items
+    menuItems = sellerMenuItems;
+  }
 
   const bottomItems = [
     { 
@@ -48,6 +68,44 @@ const Sidebar = ({ isOpen, setIsOpen, collapsed, setCollapsed }) => {
       onClick: () => alert('Help center will be implemented in future updates!')
     },
   ];
+
+  // For Admin role, show a message that admin features are under construction
+  if (user?.role === 'Administrator') {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+        <div className="bg-white p-8 rounded-xl shadow-xl text-center max-w-md">
+          <ShoppingBagIcon className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Admin Dashboard Under Construction</h2>
+          <p className="text-gray-600 mb-6">Admin features will be added soon. Thank you for your patience.</p>
+          <button
+            onClick={handleLogout}
+            className="bg-gray-800 text-white px-6 py-2 rounded-md font-medium hover:bg-gray-700 transition-colors"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // For Customer role, show a message that customer pages are in development
+  if (user?.role === 'Customer') {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+        <div className="bg-white p-8 rounded-xl shadow-xl text-center max-w-md">
+          <UserGroupIcon className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Welcome, Customer!</h2>
+          <p className="text-gray-600 mb-6">Customer features are being developed and will be available soon.</p>
+          <button
+            onClick={handleLogout}
+            className="bg-gray-800 text-white px-6 py-2 rounded-md font-medium hover:bg-gray-700 transition-colors"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
