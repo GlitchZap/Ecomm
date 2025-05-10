@@ -17,7 +17,7 @@ import {
   LocationMarkerIcon,
   HomeIcon
 } from "@heroicons/react/outline";
-import { useUser } from '../context/UserContext';
+import { useUser } from '../../context/UserContext';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
